@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/favoritesFragment">
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.internship.tvseries.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/latestFragment"
+        android:name="com.internship.tvseries.LatestFragment"
+        android:label="fragment_latest"
+        tools:layout="@layout/fragment_latest" />
+    <fragment
+        android:id="@+id/popularFragment"
+        android:name="com.internship.tvseries.PopularFragment"
+        android:label="fragment_popular"
+        tools:layout="@layout/fragment_popular" />
+</navigation>

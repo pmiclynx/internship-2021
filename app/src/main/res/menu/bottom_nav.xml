@@ -5,9 +5,9 @@
         android:title="Popular"
         android:icon="@drawable/ic_baseline_popular_24"/>
     <item
-        android:id="@+id/latestFragment"
-        android:title="Latest"
-        android:icon="@drawable/ic_baseline_latest_24"/>
+        android:id="@+id/topRatedFragment"
+        android:title="Top Rated"
+        android:icon="@drawable/ic_baseline_top_rated_24"/>
     <item
         android:id="@+id/favoritesFragment"
         android:title="Favorites"

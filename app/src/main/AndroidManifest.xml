@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TvSeries">
         <activity android:name=".ui.details.DetailsActivity"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/Theme.SplashScreen">
+        <activity android:name=".ui.splash_screen.SplashScreenActivity"
+            android:theme="@style/Theme.SplashScreen"/>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

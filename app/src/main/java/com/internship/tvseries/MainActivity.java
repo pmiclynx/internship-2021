@@ -1,5 +1,6 @@
 package com.internship.tvseries;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.internship.tvseries.ui.details.DetailsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,5 +26,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigatin_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+        Intent intent = new Intent(this, DetailsActivity.class);
+        startActivity(intent);
     }
 }

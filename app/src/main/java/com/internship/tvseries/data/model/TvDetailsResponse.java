@@ -1,9 +1,11 @@
 package com.internship.tvseries.data.model;
 
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class TvDetailsResponse{
+
+	@SerializedName("backdrop_path")
+	private String backdropPath;
 
 	@SerializedName("first_air_date")
 	private String firstAirDate;
@@ -17,12 +19,6 @@ public class TvDetailsResponse{
 	@SerializedName("poster_path")
 	private String posterPath;
 
-	@SerializedName("genres")
-	private List<GenresItem> genres;
-
-	@SerializedName("popularity")
-	private double popularity;
-
 	@SerializedName("vote_average")
 	private double voteAverage;
 
@@ -32,23 +28,23 @@ public class TvDetailsResponse{
 	@SerializedName("tagline")
 	private String tagline;
 
-	@SerializedName("episode_run_time")
-	private List<Integer> episodeRunTime;
-
 	@SerializedName("id")
 	private int id;
 
 	@SerializedName("number_of_seasons")
 	private int numberOfSeasons;
 
-	@SerializedName("next_episode_to_air")
-	private Object nextEpisodeToAir;
+//	@SerializedName("status")
+//	private String status;
 
-	@SerializedName("in_production")
-	private boolean inProduction;
 
-	@SerializedName("status")
-	private String status;
+	public TvDetailsResponse() {
+	}
+
+
+	public String getBackdropPath() {
+		return backdropPath;
+	}
 
 	public String getFirstAirDate(){
 		return firstAirDate;
@@ -66,14 +62,6 @@ public class TvDetailsResponse{
 		return posterPath;
 	}
 
-	public List<GenresItem> getGenres(){
-		return genres;
-	}
-
-	public double getPopularity(){
-		return popularity;
-	}
-
 	public double getVoteAverage(){
 		return voteAverage;
 	}
@@ -86,10 +74,6 @@ public class TvDetailsResponse{
 		return tagline;
 	}
 
-	public List<Integer> getEpisodeRunTime(){
-		return episodeRunTime;
-	}
-
 	public int getId(){
 		return id;
 	}
@@ -98,15 +82,7 @@ public class TvDetailsResponse{
 		return numberOfSeasons;
 	}
 
-	public Object getNextEpisodeToAir(){
-		return nextEpisodeToAir;
-	}
-
-	public boolean isInProduction(){
-		return inProduction;
-	}
-
-	public String getStatus(){
-		return status;
-	}
+//	public String getStatus(){
+//		return status;
+//	}
 }

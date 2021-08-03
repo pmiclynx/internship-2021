@@ -2,6 +2,7 @@ package com.internship.tvseries;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -19,9 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Intent splashIntent = new Intent(this, SplashScreenActivity.class);
-        startActivity(splashIntent);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

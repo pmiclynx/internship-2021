@@ -1,19 +1,18 @@
 package com.internship.tvseries.ui.details;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.internship.tvseries.R;
 import com.internship.tvseries.data.api.ApiClient;
 import com.internship.tvseries.data.api.TvDetailsApi;
 import com.internship.tvseries.data.model.TvDetailsResponse;
+import com.internship.tvseries.databinding.ActivityDetailsBinding;
 import com.internship.tvseries.utils.Constants;
 
 import retrofit2.Call;
@@ -22,11 +21,13 @@ import retrofit2.Response;
 
 public class DetailsActivity extends AppCompatActivity {
 
+    private ActivityDetailsBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
-
+        binding = ActivityDetailsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         /*
         Button testButton = findViewById(R.id.testButton);
@@ -70,6 +71,7 @@ public class DetailsActivity extends AppCompatActivity {
         TextView overview = findViewById(R.id.tvOverview);
 
         TvDetailsApi tvApi = ApiClient.getTvDetailsApi();
+        int id = getIntent().getExtras().getInt("id");
         Call<TvDetailsResponse> responseCall = tvApi.getMovieDetails(84958);
         responseCall.enqueue(new Callback<TvDetailsResponse>() {
             @Override
@@ -85,8 +87,12 @@ public class DetailsActivity extends AppCompatActivity {
                                 .load(Constants.IMAGE_BASE_URL + tv.getPosterPath())
                                 .into(poster);
                         title.setText(tv.getName());
-                        rating.setText(String.valueOf(tv.getVoteAverage()));
+                        binding.tvRating.setText("Rating: " + tv.getVoteAverage());
                         overview.setText(tv.getOverview());
+                        binding.tvSeasons.setText(String.valueOf(tv.getNumberOfSeasons()));
+                        binding.tvEpisodes.setText(String.valueOf(tv.getNumberOfEpisodes()));
+                        binding.tvStatus.setText(tv.getStatus());
+                        binding.tvTagline.setText(tv.getTagline());
 
                     }
 

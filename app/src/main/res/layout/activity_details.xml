@@ -23,6 +23,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:background="@color/black"
+                android:textColor="@color/white"
+                android:text="Status"
+                app:layout_constraintTop_toTopOf="@id/ivBackdrop"
+                app:layout_constraintEnd_toEndOf="@id/ivBackdrop"/>
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline4"
                 android:layout_width="wrap_content"
@@ -35,15 +47,74 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="170dp" />
+                app:layout_constraintGuide_begin="160dp" />
+
+            <!-- Border, idk-->
+            <View
+                android:layout_width="134dp"
+                android:layout_height="199dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/ivPoster"
+                app:layout_constraintEnd_toEndOf="@id/ivPoster"
+                app:layout_constraintStart_toStartOf="@id/ivPoster"
+                app:layout_constraintTop_toTopOf="@id/ivPoster" />
 
             <ImageView
                 android:id="@+id/ivPoster"
-                android:layout_width="135dp"
-                android:layout_height="180dp"
+                android:layout_width="130dp"
+                android:layout_height="195dp"
                 android:scaleType="matrix"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+            <LinearLayout
+                android:id="@+id/productionDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="15dp"
+                app:layout_constraintBottom_toBottomOf="@id/ivPoster"
+                app:layout_constraintTop_toBottomOf="@id/tvRating"
+                app:layout_constraintStart_toEndOf="@id/ivPoster">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvSeasons"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="6" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Seasons" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvEpisodes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="100" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Episodes" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -52,10 +123,22 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
                 android:text="Title"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/ivBackdrop" />
+
+            <TextView
+                android:id="@+id/tvTagline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="2dp"
+                android:text="Tagline"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
             <TextView
                 android:id="@+id/tvRating"
@@ -67,18 +150,30 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/tvTagline" />
+
+            <TextView
+                android:id="@+id/textOverview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:text="Overview"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/productionDetails" />
 
             <TextView
                 android:id="@+id/tvOverview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:maxWidth="200dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:textSize="16sp"
                 android:text="Overview"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivPoster" />
+                app:layout_constraintTop_toBottomOf="@+id/textOverview" />
 
             <Button
                 android:id="@+id/btnAddFavorite"
@@ -89,7 +184,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvOverview"/>
+                app:layout_constraintTop_toBottomOf="@id/tvOverview" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

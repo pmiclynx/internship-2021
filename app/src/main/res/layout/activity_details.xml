@@ -27,10 +27,14 @@
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:background="@color/black"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:background="@color/transparent_black"
                 android:textColor="@color/white"
+                android:shadowColor="@color/black"
+                android:shadowDx="10"
+                android:shadowDy="10"
+                android:shadowRadius="6"
                 android:text="Status"
                 app:layout_constraintTop_toTopOf="@id/ivBackdrop"
                 app:layout_constraintEnd_toEndOf="@id/ivBackdrop"/>
@@ -118,25 +122,34 @@
 
             <TextView
                 android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
                 android:text="Title"
                 android:textSize="22sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/ivBackdrop" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tvTagline"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="2dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:focusable="false"
+                android:fontFamily="sans-serif"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
                 android:text="Tagline"
                 android:textSize="15sp"
+                android:textColor="@android:color/tab_indicator_text"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
@@ -185,6 +198,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvOverview" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="395dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

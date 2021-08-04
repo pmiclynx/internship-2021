@@ -1,9 +1,6 @@
 package com.internship.tvseries.utils;
 
-import android.app.Application;
-
 import com.internship.tvseries.data.api.ApiClient;
-import com.internship.tvseries.data.api.TvDetailsApi;
 import com.internship.tvseries.data.repository.TvDetailsRepository;
 import com.internship.tvseries.ui.details.DetailsViewModelFactory;
 

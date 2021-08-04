@@ -1,5 +1,6 @@
 package com.internship.tvseries.ui.details;
 
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -53,9 +54,8 @@ public class DetailsViewModel extends ViewModel {
                     TvDetailsResponse tv = response.body();
                     if (tv != null)
                         _tvDetails.postValue(tv);
-                } else {
+                } else
                     Log.i("DetailsViewModel", response.message());
-                }
             }
 
             @Override

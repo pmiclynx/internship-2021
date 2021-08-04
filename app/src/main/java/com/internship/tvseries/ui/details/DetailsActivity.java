@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +20,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/*
+How to start a Details activity:
+Intent intent = new Intent(this, DetailsActivity.class);
+intent.putExtra("id", tvId);
+startActivity(intent);
+ */
 public class DetailsActivity extends AppCompatActivity {
 
     private ActivityDetailsBinding binding;

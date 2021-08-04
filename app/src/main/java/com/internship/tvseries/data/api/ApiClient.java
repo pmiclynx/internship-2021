@@ -47,6 +47,4 @@ public class ApiClient {
     public static TvDetailsApi getTvDetailsApi() {
         return tvDetailsApi;
     }
-
-
 }

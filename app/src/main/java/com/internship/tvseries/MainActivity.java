@@ -2,6 +2,7 @@ package com.internship.tvseries;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -9,7 +10,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.internship.tvseries.login_screen.Register;
 import com.internship.tvseries.ui.splash_screen.SplashScreenActivity;
 
 import com.internship.tvseries.login_screen.Login;
@@ -23,11 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
-
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigatin_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_fragment);

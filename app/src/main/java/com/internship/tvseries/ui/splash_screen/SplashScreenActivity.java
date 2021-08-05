@@ -2,10 +2,12 @@ package com.internship.tvseries.ui.splash_screen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.internship.tvseries.R;
+import com.internship.tvseries.login_screen.Login;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -17,8 +19,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         boolean h = new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                startActivity(new Intent(getApplicationContext(), Login.class));
                 finish();
             }
         }, 2000);
+
     }
+
 }

@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/gradient_buttons.xml" value="0.3723958333333333" />
+        <entry key="app/src/main/res/drawable/ic_baseline_top_rated_24.xml" value="0.3723958333333333" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3723958333333333" />
+        <entry key="app/src/main/res/drawable/splash_image.xml" value="0.3723958333333333" />
+        <entry key="app/src/main/res/layout-w1240dp/activity_login.xml" value="0.21887550200803213" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1984375" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_registration.xml" value="0.18385416666666668" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1984375" />
+        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.1984375" />
+        <entry key="app/src/main/res/layout/fragment_popular.xml" value="0.1984375" />
+        <entry key="app/src/main/res/layout/fragment_top_rated.xml" value="0.1984375" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3723958333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3723958333333333" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

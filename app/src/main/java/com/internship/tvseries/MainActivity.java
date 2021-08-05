@@ -1,6 +1,8 @@
 package com.internship.tvseries;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -8,11 +10,17 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.internship.tvseries.ui.splash_screen.SplashScreenActivity;
+
+import com.internship.tvseries.login_screen.Login;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent splashIntent = new Intent(this, SplashScreenActivity.class);
+        startActivity(splashIntent);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

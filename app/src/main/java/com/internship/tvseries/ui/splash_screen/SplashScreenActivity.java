@@ -1,5 +1,6 @@
 package com.internship.tvseries.ui.splash_screen;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.internship.tvseries.MainActivity;
 import com.internship.tvseries.R;
+import com.internship.tvseries.login_screen.Login;
+
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -17,11 +20,12 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            finish();
+        boolean h = new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                finish();
+            }
         }, 2000);
     }
 }

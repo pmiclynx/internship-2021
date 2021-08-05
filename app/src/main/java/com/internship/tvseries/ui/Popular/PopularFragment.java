@@ -1,4 +1,5 @@
 package com.internship.tvseries.ui.Popular;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.internship.tvseries.GenAdapter;
+import com.internship.tvseries.MainActivity;
 import com.internship.tvseries.R;
 import com.internship.tvseries.data.api.MovieApi;
 import com.internship.tvseries.data.model.MoviesList;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.internship.tvseries.data.model.Result;
+import com.internship.tvseries.ui.details.DetailsActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,7 +88,14 @@ public class PopularFragment extends Fragment {
         list.observe(getViewLifecycleOwner(), movieResult -> {
             recyclerView = view.findViewById(R.id.recycler_vpopular);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            GenAdapter adapter = new GenAdapter(getContext(),movieResult);
+            GenAdapter adapter = new GenAdapter(getContext(), movieResult, new GenAdapter.ItemClickListener() {
+                @Override
+                public void onItemClicked(int id) {
+                    Intent intent = new Intent(getContext(), DetailsActivity.class);
+                    intent.putExtra("id", id);
+                    startActivity(intent);
+                }
+            });
             recyclerView.setAdapter(adapter);
             recyclerView.setHasFixedSize(true);
 

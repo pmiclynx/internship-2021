@@ -20,12 +20,17 @@ import java.util.List;
 
 public class GenAdapter extends RecyclerView.Adapter<GenAdapter.ViewHolder> {
     private final List<Result> movieResult;
+    private final ItemClickListener listener;
     private Context context;
+    public interface ItemClickListener{
+        void onItemClicked(int id);
+    }
     String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w780";
 
-    public GenAdapter(Context context, List<Result> movieResult) {
+    public GenAdapter(Context context, List<Result> movieResult, ItemClickListener listener) {
         this.context = context;
         this.movieResult = new ArrayList<>(movieResult);
+        this.listener=listener;
     }
 
 
@@ -42,8 +47,15 @@ public class GenAdapter extends RecyclerView.Adapter<GenAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull GenAdapter.ViewHolder holder, int position) {
-        Log.v("CNT", "bind" + position);
-        holder.Bind(movieResult.get(position));
+        Result item= movieResult.get(position);
+        holder.Bind(item);
+
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClicked(item.getId());
+            }
+        });
     }
 
     @Override
@@ -54,13 +66,14 @@ public class GenAdapter extends RecyclerView.Adapter<GenAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        final View view;
         TextView movieTitle, movieRate, releaseDate;
         ImageView movieImg;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            this.view=itemView;
             movieTitle = itemView.findViewById(R.id.movie_name);
             movieRate = itemView.findViewById(R.id.rate);
             releaseDate = itemView.findViewById(R.id.release_date);

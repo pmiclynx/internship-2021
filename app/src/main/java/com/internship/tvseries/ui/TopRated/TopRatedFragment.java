@@ -1,4 +1,5 @@
 package com.internship.tvseries.ui.TopRated;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.internship.tvseries.data.model.Result;
+import com.internship.tvseries.ui.details.DetailsActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +38,7 @@ public class TopRatedFragment extends Fragment {
     public static int PAGE = 1;
     public static String API_KEY = "0a416fc6c49f4a04db6e3bd398ef8579";
     public static String LANGUAGE = "en-US";
-    public static String CATEGORY = "top-rated";
+    public static String CATEGORY = "top_rated";
 
 
     private RecyclerView recyclerView;
@@ -70,7 +72,7 @@ public class TopRatedFragment extends Fragment {
                 List<Result> movieList = new ArrayList<>();
                 MoviesList movies = response.body();
                 for (Result movie : movies.getResults()) {
-                    Log.v("abc", movie.toString());
+
                     movieList.add(movie);
                 }
 
@@ -80,15 +82,22 @@ public class TopRatedFragment extends Fragment {
 
             @Override
             public void onFailure(Call<MoviesList> call, Throwable t) {
-                Log.v("ABC", t.getMessage());
+
             }
         });
 
         list.observe(getViewLifecycleOwner(), movieResult -> {
-            Log.v("topRateOvi", "" + movieList.size());
+
             recyclerView = view.findViewById(R.id.recycler_vtoprated);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            GenAdapter adapter = new GenAdapter(getContext(), movieResult);
+            GenAdapter adapter = new GenAdapter(getContext(), movieResult, new GenAdapter.ItemClickListener() {
+                @Override
+                public void onItemClicked(int id) {
+                    Intent intent = new Intent(getContext(), DetailsActivity.class);
+                    intent.putExtra("id", id);
+                    startActivity(intent);
+                }
+            });
             recyclerView.setAdapter(adapter);
             recyclerView.setHasFixedSize(true);
 

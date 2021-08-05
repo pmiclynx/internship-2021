@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
     <color name="transparent_black">#77000000</color>
+    <color name="Silver">#C0C0C0</color>
+    <color name="PowderBlue">#B0E0E6</color>
+    <color name="PaleTurquoise">#AFEEEE</color>
 </resources>

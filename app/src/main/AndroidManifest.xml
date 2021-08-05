@@ -11,6 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TvSeries">
+        <activity
+            android:name="com.internship.tvseries.login_screen.Register"
+            android:exported="true" />
+        <activity
+            android:name="com.internship.tvseries.login_screen.Login"
+            android:exported="true" />
         <activity android:name=".ui.details.DetailsActivity"
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".ui.splash_screen.SplashScreenActivity"

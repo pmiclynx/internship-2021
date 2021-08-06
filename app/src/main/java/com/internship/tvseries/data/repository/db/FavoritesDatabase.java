@@ -18,7 +18,7 @@ public abstract class FavoritesDatabase extends RoomDatabase {
 
    public static FavoritesDatabase getInstance(Context context) {
        if (instance == null)
-           instance = Room.databaseBuilder(context, FavoritesDatabase.class, "favorites_database").allowMainThreadQueries().build();
+           instance = Room.databaseBuilder(context, FavoritesDatabase.class, "favorites_database").build();
 
        return instance;
    }

@@ -10,11 +10,13 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.internship.tvseries.data.api.ApiClient;
 import com.internship.tvseries.data.api.TvDetailsApi;
+import com.internship.tvseries.data.model.MoviesList;
 import com.internship.tvseries.data.model.TvDetailsResponse;
 import com.internship.tvseries.data.repository.FavoritesDao;
 import com.internship.tvseries.data.repository.FavoritesRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 import com.internship.tvseries.databinding.ActivityDetailsBinding;
+import com.internship.tvseries.ui.favorites.FavoritesFragment;
 import com.internship.tvseries.utils.Constants;
 import com.internship.tvseries.utils.InjectorUtils;
 
@@ -33,6 +35,7 @@ startActivity(intent);
 public class DetailsActivity extends AppCompatActivity {
 
     private ActivityDetailsBinding binding;
+    private FindTvListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +67,40 @@ public class DetailsActivity extends AppCompatActivity {
         binding.tvTagline.setText(tv.getTagline());
 
 
-        if (repo.findById(tv.getId()) != null)
-            binding.btnAddFavorite.setEnabled(false);
+        listener = new FindTvListener() {
+            @Override
+            public void onReceived(boolean found) {
+                DetailsActivity.this.runOnUiThread(() -> {
+                    if (found) binding.btnAddFavorite.setEnabled(false);
+                });
+            }
+        };
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (repo.findById(tv.getId()) != null)
+                    listener.onReceived(true);
+            }
+        }).start();
+
 
         binding.btnAddFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                repo.insert(tv);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        repo.insert(tv);
+                    }
+                }).start();
+
                 binding.btnAddFavorite.setEnabled(false);
             }
         });
+    }
+
+    public interface FindTvListener {
+        void onReceived(boolean found);
     }
 }

@@ -72,10 +72,10 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
 
     private void deleteItem(TvDetailsResponse item) {
         FavoritesRepository repo = FavoritesRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao());
-        repo.delete(item);
+
+        new Thread(() -> repo.delete(item)).start();
         movieResult.remove(item);
         notifyDataSetChanged();
-
     }
 
     @Override

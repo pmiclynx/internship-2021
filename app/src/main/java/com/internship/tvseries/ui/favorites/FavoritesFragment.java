@@ -30,6 +30,7 @@ public class FavoritesFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private List<TvDetailsResponse> movieList = new ArrayList<>();
+    private MoviesListener listener;
 
 
     @Override
@@ -37,22 +38,38 @@ public class FavoritesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
-        movieList = FavoritesRepository.getInstance(FavoritesDatabase.getInstance(getContext()).favoritesDao()).getAll();
+
+        listener = movies -> {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    recyclerView = view.findViewById(R.id.recycler_vfavorites);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    FavAdapter adapter = new FavAdapter(getContext(), movies, new FavAdapter.ItemClickListener() {
+                        @Override
+                        public void onItemClicked(int id) {
+                            Intent intent = new Intent(getContext(), DetailsActivity.class);
+                            intent.putExtra("id", id);
+                            startActivity(intent);
+                        }
+                    });
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setHasFixedSize(true);
+                }
+            });
+        };
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                movieList = FavoritesRepository.getInstance(FavoritesDatabase.getInstance(getContext()).favoritesDao()).getAll();
+                listener.onReceived(movieList);
+            }
+        }).start();
+
 
         // retrofit
-
-        recyclerView = view.findViewById(R.id.recycler_vfavorites);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        FavAdapter adapter = new FavAdapter(getContext(), movieList, new FavAdapter.ItemClickListener() {
-            @Override
-            public void onItemClicked(int id) {
-                Intent intent = new Intent(getContext(), DetailsActivity.class);
-                intent.putExtra("id", id);
-                startActivity(intent);
-            }
-        });
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
 
 
         return view;
@@ -64,5 +81,8 @@ public class FavoritesFragment extends Fragment {
 
     }
 
+    public interface MoviesListener {
+        void onReceived(List<TvDetailsResponse> movies);
+    }
 
 }

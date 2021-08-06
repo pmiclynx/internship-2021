@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TopRatedFragment">
+    tools:context=".ui.TopRated.TopRatedFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Top Rated"
-        android:textSize="30sp" />
+    <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_vtoprated"
+    android:layout_width="match_parent"
+    android:layout_height="668dp"
+    android:layout_marginTop="10dp"
+    android:background="@color/cardview_light_background"
+
+    ></androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

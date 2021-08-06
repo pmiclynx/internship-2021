@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PopularFragment">
+    tools:context=".ui.Popular.PopularFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_vpopular"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Popular"
-        android:textSize="30sp" />
+        android:layout_height="668dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/cardview_light_background"
+
+        ></androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

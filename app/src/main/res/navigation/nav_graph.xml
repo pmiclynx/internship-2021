@@ -12,12 +12,12 @@
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/popularFragment"
-        android:name="com.internship.tvseries.PopularFragment"
+        android:name="com.internship.tvseries.ui.Popular.PopularFragment"
         android:label="fragment_popular"
         tools:layout="@layout/fragment_popular" />
     <fragment
         android:id="@+id/topRatedFragment"
-        android:name="com.internship.tvseries.TopRatedFragment"
+        android:name="com.internship.tvseries.ui.TopRated.TopRatedFragment"
         android:label="fragment_top_rated"
         tools:layout="@layout/fragment_top_rated" />
 </navigation>

@@ -42,9 +42,11 @@ public class ApiClient {
             .build();
 
     private static final TvDetailsApi tvDetailsApi = retrofit.create(TvDetailsApi.class);
-
-
     public static TvDetailsApi getTvDetailsApi() {
         return tvDetailsApi;
     }
+
+    /*private static final MovieApi movieApi=retrofit.create(MovieApi.class);
+    public static MovieApi getMovieApi(){return movieApi;}*/
+
 }

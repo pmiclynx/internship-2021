@@ -1,16 +1,11 @@
 package com.internship.tvseries.data.model;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-@Entity(tableName = "favorites")
 public class Result implements Serializable {
 
     @SerializedName("backdrop_path")
@@ -19,14 +14,9 @@ public class Result implements Serializable {
     @SerializedName("genre_ids")
     @Expose
     private List<Integer> genreIds = null;
-
-    @PrimaryKey
-    @ColumnInfo(name = "id")
     @SerializedName("id")
     @Expose
     private Integer id;
-
-    @ColumnInfo(name = "name")
     @SerializedName("name")
     @Expose
     private String name;
@@ -45,21 +35,15 @@ public class Result implements Serializable {
     @SerializedName("popularity")
     @Expose
     private Double popularity;
-
-    @ColumnInfo(name = "poster")
     @SerializedName("poster_path")
     @Expose
     private Object posterPath;
-
-    @ColumnInfo(name = "rating")
     @SerializedName("vote_average")
     @Expose
     private Double voteAverage;
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
-
-    @ColumnInfo(name = "release_date")
     @SerializedName("first_air_date")
     @Expose
     private String firstAirDate;

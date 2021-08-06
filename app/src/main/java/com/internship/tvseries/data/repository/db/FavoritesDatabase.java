@@ -6,10 +6,10 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.internship.tvseries.data.model.Result;
+import com.internship.tvseries.data.model.TvDetailsResponse;
 import com.internship.tvseries.data.repository.FavoritesDao;
 
-@Database(entities = {Result.class}, version = 1)
+@Database(entities = {TvDetailsResponse.class}, version = 1)
 public abstract class FavoritesDatabase extends RoomDatabase {
 
    public abstract FavoritesDao favoritesDao();

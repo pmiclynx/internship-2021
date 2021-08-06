@@ -4,9 +4,8 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.RawQuery;
 
-import com.internship.tvseries.data.model.Result;
+import com.internship.tvseries.data.model.TvDetailsResponse;
 
 import java.util.List;
 
@@ -14,11 +13,11 @@ import java.util.List;
 public interface FavoritesDao {
 
     @Insert
-    long insertFavorite(Result result);
+    long insertFavorite(TvDetailsResponse result);
 
     @Delete
-    int deleteFavorite(Result result);
+    int deleteFavorite(TvDetailsResponse result);
 
     @Query("SELECT * FROM favorites")
-    List<Result> getAllFavorites();
+    List<TvDetailsResponse> getAllFavorites();
 }

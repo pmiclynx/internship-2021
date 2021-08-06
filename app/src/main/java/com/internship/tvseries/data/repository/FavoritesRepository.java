@@ -1,6 +1,6 @@
 package com.internship.tvseries.data.repository;
 
-import com.internship.tvseries.data.model.Result;
+import com.internship.tvseries.data.model.TvDetailsResponse;
 
 import java.util.List;
 
@@ -21,15 +21,15 @@ public class FavoritesRepository {
         return instance;
     }
 
-    public long insert(Result result) {
+    public long insert(TvDetailsResponse result) {
         return favoritesDao.insertFavorite(result);
     }
 
-    public int delete(Result result) {
+    public int delete(TvDetailsResponse result) {
         return favoritesDao.deleteFavorite(result);
     }
 
-    public List<Result> getAll() {
+    public List<TvDetailsResponse> getAll() {
         return favoritesDao.getAllFavorites();
     }
 }

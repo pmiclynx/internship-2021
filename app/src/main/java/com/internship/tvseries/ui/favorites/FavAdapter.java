@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.internship.tvseries.R;
 import com.internship.tvseries.data.model.TvDetailsResponse;
+import com.internship.tvseries.data.repository.FavoritesRepository;
+import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +64,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
         holder.delBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //db delete item
+                FavoritesRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao()).delete(item);
             }
         });
     }

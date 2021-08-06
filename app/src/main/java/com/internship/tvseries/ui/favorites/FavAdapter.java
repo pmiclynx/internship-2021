@@ -1,11 +1,11 @@
 package com.internship.tvseries.ui.favorites;
-import com.internship.tvseries.data.model.Result;
+
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,17 +25,18 @@ import java.util.List;
 public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
     private final List<TvDetailsResponse> movieResult;
     private final ItemClickListener listener;
-    private Context context;
-    private Button delBtn;
-    public interface ItemClickListener{
+    private final Context context;
+
+    public interface ItemClickListener {
         void onItemClicked(int id);
     }
+
     String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w780";
 
     public FavAdapter(Context context, List<TvDetailsResponse> movieResult, ItemClickListener listener) {
         this.context = context;
         this.movieResult = new ArrayList<>(movieResult);
-        this.listener=listener;
+        this.listener = listener;
     }
 
 
@@ -52,7 +53,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull FavAdapter.ViewHolder holder, int position) {
-        TvDetailsResponse item= movieResult.get(position);
+        TvDetailsResponse item = movieResult.get(position);
         holder.Bind(item);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
@@ -64,9 +65,17 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
         holder.delBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FavoritesRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao()).delete(item);
+                deleteItem(item);
             }
         });
+    }
+
+    private void deleteItem(TvDetailsResponse item) {
+        FavoritesRepository repo = FavoritesRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao());
+        repo.delete(item);
+        movieResult.remove(item);
+        notifyDataSetChanged();
+
     }
 
     @Override
@@ -80,17 +89,17 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
         final View view;
         TextView movieTitle, movieRate, releaseDate;
         ImageView movieImg;
-        Button delBtn;
+        ImageButton delBtn;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.view=itemView;
+            this.view = itemView;
             movieTitle = itemView.findViewById(R.id.movie_name);
             movieRate = itemView.findViewById(R.id.rate);
             releaseDate = itemView.findViewById(R.id.release_date);
             movieImg = itemView.findViewById(R.id.movie_img);
-            delBtn=itemView.findViewById(R.id.del_fav);
+            delBtn = itemView.findViewById(R.id.del_fav);
 
         }
 

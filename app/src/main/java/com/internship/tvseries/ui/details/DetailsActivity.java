@@ -48,6 +48,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void bindUI(TvDetailsResponse tv) {
+        FavoritesRepository repo = FavoritesRepository.getInstance(FavoritesDatabase.getInstance(getApplicationContext()).favoritesDao());
         Glide.with(getApplicationContext())
                 .load(Constants.IMAGE_BASE_URL + tv.getBackdropPath())
                 .into(binding.ivBackdrop);
@@ -62,10 +63,15 @@ public class DetailsActivity extends AppCompatActivity {
         binding.tvStatus.setText(tv.getStatus());
         binding.tvTagline.setText(tv.getTagline());
 
+
+        if (repo.findById(tv.getId()) != null)
+            binding.btnAddFavorite.setEnabled(false);
+
         binding.btnAddFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FavoritesRepository.getInstance(FavoritesDatabase.getInstance(getApplicationContext()).favoritesDao()).insert(tv);
+                repo.insert(tv);
+                binding.btnAddFavorite.setEnabled(false);
             }
         });
     }

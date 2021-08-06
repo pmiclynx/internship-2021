@@ -2,6 +2,7 @@ package com.internship.tvseries.ui.details;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -10,6 +11,9 @@ import com.bumptech.glide.Glide;
 import com.internship.tvseries.data.api.ApiClient;
 import com.internship.tvseries.data.api.TvDetailsApi;
 import com.internship.tvseries.data.model.TvDetailsResponse;
+import com.internship.tvseries.data.repository.FavoritesDao;
+import com.internship.tvseries.data.repository.FavoritesRepository;
+import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 import com.internship.tvseries.databinding.ActivityDetailsBinding;
 import com.internship.tvseries.utils.Constants;
 import com.internship.tvseries.utils.InjectorUtils;
@@ -44,6 +48,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void bindUI(TvDetailsResponse tv) {
+        FavoritesRepository repo = FavoritesRepository.getInstance(FavoritesDatabase.getInstance(getApplicationContext()).favoritesDao());
         Glide.with(getApplicationContext())
                 .load(Constants.IMAGE_BASE_URL + tv.getBackdropPath())
                 .into(binding.ivBackdrop);
@@ -57,5 +62,17 @@ public class DetailsActivity extends AppCompatActivity {
         binding.tvEpisodes.setText(String.valueOf(tv.getNumberOfEpisodes()));
         binding.tvStatus.setText(tv.getStatus());
         binding.tvTagline.setText(tv.getTagline());
+
+
+        if (repo.findById(tv.getId()) != null)
+            binding.btnAddFavorite.setEnabled(false);
+
+        binding.btnAddFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                repo.insert(tv);
+                binding.btnAddFavorite.setEnabled(false);
+            }
+        });
     }
 }

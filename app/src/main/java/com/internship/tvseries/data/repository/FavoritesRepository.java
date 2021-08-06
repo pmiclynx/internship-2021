@@ -32,4 +32,8 @@ public class FavoritesRepository {
     public List<TvDetailsResponse> getAll() {
         return favoritesDao.getAllFavorites();
     }
+
+    public TvDetailsResponse findById(int id) {
+        return favoritesDao.findById(id);
+    }
 }

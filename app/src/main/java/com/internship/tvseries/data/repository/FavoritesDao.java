@@ -20,4 +20,7 @@ public interface FavoritesDao {
 
     @Query("SELECT * FROM favorites")
     List<TvDetailsResponse> getAllFavorites();
+
+    @Query("SELECT * FROM favorites where id = :id")
+    TvDetailsResponse findById(int id);
 }

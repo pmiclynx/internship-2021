@@ -36,7 +36,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PopularFragment extends Fragment {
 
-    public static String BASE_URL = "https://api.themoviedb.org/3/";
     public static String CATEGORY = "popular";
 
 

@@ -35,8 +35,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TopRatedFragment extends Fragment {
 
-    public static String BASE_URL = "https://api.themoviedb.org/3/";
-    public static String API_KEY = "0a416fc6c49f4a04db6e3bd398ef8579";
     public static String CATEGORY = "top_rated";
 
 

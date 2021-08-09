@@ -1,4 +1,6 @@
 package com.internship.tvseries;
+import com.internship.tvseries.data.api.ApiClient;
+import com.internship.tvseries.data.model.Configuration;
 import com.internship.tvseries.data.model.Result;
 import android.content.Context;
 import android.util.Log;
@@ -17,11 +19,16 @@ import com.internship.tvseries.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class GenAdapter extends RecyclerView.Adapter<GenAdapter.ViewHolder> {
     private final List<Result> movieResult;
     private final ItemClickListener listener;
     private Context context;
+    public ImageURLListener URL;
     public interface ItemClickListener{
         void onItemClicked(int id);
     }
@@ -85,13 +92,43 @@ public class GenAdapter extends RecyclerView.Adapter<GenAdapter.ViewHolder> {
             movieTitle.setText(movie.getName());
             movieRate.setText(String.valueOf(movie.getPopularity()));
             releaseDate.setText(movie.getFirstAirDate());
+            final String[] imageURL = new String[1];
+            URL = new ImageURLListener() {
+                @Override
+                public void onReceived(String URL) {
+                    ((MainActivity)context).getSupportFragmentManager().findFragmentById(R.id.nav_fragment).getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.v("test",URL);
+                            imageURL[0] =URL;
+                            Glide.with(context)
+                                    .load(imageURL[0] + movie.getPosterPath())
+                                    .into(movieImg);
+                        }
+                    });
 
-            //Adding glide to display image
-            Glide.with(context)
-                    .load(IMAGE_BASE_URL + movie.getPosterPath())
-                    //.load("https://cdn.vox-cdn.com/thumbor/AahdPlzwvjRZGh1WjS1ND_Mkub0=/0x0:2040x1360/1200x800/filters:focal(857x517:1183x843)/cdn.vox-cdn.com/uploads/chorus_image/image/68820539/acastro_180427_1777_0001.0.jpg")
+                }
+            };
 
-                    .into(movieImg);
+            Call<Configuration> config= ApiClient.getConfigApi().getConfiguration();
+            config.enqueue(new Callback<Configuration>(){
+
+                @Override
+                public void onResponse(Call<Configuration> call, Response<Configuration> response) {
+                    Configuration configuration= response.body();
+                    URL.onReceived(configuration.getImages().getSecureBaseUrl()+configuration.getImages().getPosterSizes().get(5));
+                }
+
+                @Override
+                public void onFailure(Call<Configuration> call, Throwable t) {
+
+                }
+            });
+
         }
+    }
+    interface ImageURLListener{
+        void onReceived(String URL);
+
     }
 }

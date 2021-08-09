@@ -1,6 +1,5 @@
 package com.internship.tvseries.ui.details;
 
-import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -9,10 +8,10 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 
 import com.internship.tvseries.data.model.TvDetailsResponse;
 import com.internship.tvseries.data.repository.TvDetailsRepository;
+import com.internship.tvseries.ui.base.BaseViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailsViewModel extends ViewModel {
+public class DetailsViewModel extends BaseViewModel {
 
     private final TvDetailsRepository detailsRepository;
 

@@ -4,27 +4,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.internship.tvseries.data.api.ApiClient;
-import com.internship.tvseries.data.api.TvDetailsApi;
-import com.internship.tvseries.data.model.MoviesList;
 import com.internship.tvseries.data.model.TvDetailsResponse;
-import com.internship.tvseries.data.repository.FavoritesDao;
 import com.internship.tvseries.data.repository.FavoritesRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 import com.internship.tvseries.databinding.ActivityDetailsBinding;
-import com.internship.tvseries.ui.favorites.FavoritesFragment;
+import com.internship.tvseries.ui.base.BaseActivity;
 import com.internship.tvseries.utils.Constants;
 import com.internship.tvseries.utils.InjectorUtils;
 
 import org.jetbrains.annotations.NotNull;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /*
 How to start a Details activity:
@@ -32,20 +23,24 @@ Intent intent = new Intent(this, DetailsActivity.class);
 intent.putExtra("id", tvId);
 startActivity(intent);
  */
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends BaseActivity<DetailsViewModel> {
 
     private ActivityDetailsBinding binding;
     private FindTvListener listener;
+
+    @NotNull
+    @Override
+    public DetailsViewModel createViewModel() {
+        int id = getIntent().getExtras().getInt("id");
+        DetailsViewModelFactory factory = InjectorUtils.getInstance().provideDetailsViewModelFactory(id);
+        return new ViewModelProvider(this, factory).get(DetailsViewModel.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        int id = getIntent().getExtras().getInt("id");
-        DetailsViewModelFactory factory = InjectorUtils.getInstance().provideDetailsViewModelFactory(id);
-        DetailsViewModel viewModel = new ViewModelProvider(this, factory).get(DetailsViewModel.class);
 
         viewModel.tvDetails.observe(this, this::bindUI);
     }

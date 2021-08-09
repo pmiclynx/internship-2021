@@ -9,10 +9,7 @@ public interface MovieApi {
 
     @GET("tv/{category}")
     Call<MoviesList> listOfMovies(
-            @Path("category") String category,
-            @Query("api_key") String apiKey,
-            @Query("language") String language,
-            @Query("page")int page
+            @Path("category") String category
     );
     //https://api.themoviedb.org/3/movie/550?api_key=f93778744b7ccdc7a4e6b85cbee2d387
 }

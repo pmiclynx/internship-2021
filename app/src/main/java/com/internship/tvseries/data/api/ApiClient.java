@@ -49,4 +49,7 @@ public class ApiClient {
     private static final MovieApi movieApi=retrofit.create(MovieApi.class);
     public static MovieApi getMovieApi(){return movieApi;}
 
+    private static final Config configApi = retrofit.create(Config.class);
+    public static Config getConfigApi(){return configApi;}
+
 }

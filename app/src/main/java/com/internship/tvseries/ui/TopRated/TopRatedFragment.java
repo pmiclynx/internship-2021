@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.internship.tvseries.GenAdapter;
 import com.internship.tvseries.R;
+import com.internship.tvseries.data.api.ApiClient;
 import com.internship.tvseries.data.api.MovieApi;
 import com.internship.tvseries.data.model.MoviesList;
 
@@ -34,10 +35,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TopRatedFragment extends Fragment {
 
-    public static String BASE_URL = "https://api.themoviedb.org/3/";
-    public static int PAGE = 1;
-    public static String API_KEY = "0a416fc6c49f4a04db6e3bd398ef8579";
-    public static String LANGUAGE = "en-US";
     public static String CATEGORY = "top_rated";
 
 
@@ -53,14 +50,7 @@ public class TopRatedFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_top_rated, container, false);
 
 
-        // retrofit
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        MovieApi topRatedInterface = retrofit.create(MovieApi.class);
-        Call<MoviesList> call = topRatedInterface.listOfMovies(CATEGORY,API_KEY, LANGUAGE, PAGE);// get json data and convert it to gson
+        Call<MoviesList> call = ApiClient.getMovieApi().listOfMovies(CATEGORY);
 
         call.enqueue(new Callback<MoviesList>() {
             @Override

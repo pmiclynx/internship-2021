@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TvSeries">
         <activity
-            android:name="com.internship.tvseries.login_screen.Register"
+            android:name="com.internship.tvseries.login_screen.register.Register"
             android:exported="true" />
         <activity
             android:name="com.internship.tvseries.login_screen.Login"

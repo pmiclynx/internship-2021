@@ -16,6 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.internship.tvseries.MainActivity;
 import com.internship.tvseries.R;
+import com.internship.tvseries.login_screen.register.Register;
 
 public class Login extends AppCompatActivity {
 

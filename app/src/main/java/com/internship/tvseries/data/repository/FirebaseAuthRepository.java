@@ -1,13 +1,17 @@
 package com.internship.tvseries.data.repository;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
-public class FirebaseAuthRepository {
+import com.google.firebase.auth.FirebaseAuth;
+import com.internship.tvseries.data.model.AuthState;
+
+//Authentication repository using Firebase
+public class FirebaseAuthRepository implements AuthRepository {
 
     private static FirebaseAuthRepository instance = null;
     private final FirebaseAuth firebaseAuth;
+    private final MutableLiveData<AuthState> registerIsSuccessful = new MutableLiveData<>();
 
     private FirebaseAuthRepository() {
         firebaseAuth = FirebaseAuth.getInstance();
@@ -19,8 +23,16 @@ public class FirebaseAuthRepository {
         return instance;
     }
 
-    public Task<AuthResult> register(String email, String password) {
-        return firebaseAuth.createUserWithEmailAndPassword(email, password);
+    @Override
+    public void register(String email, String password) {
+        AuthState authState = new AuthState();
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> authState.setSuccessful(true))
+                .addOnFailureListener(e -> authState.setErrorMessage(e.getMessage()));
     }
 
+    @Override
+    public LiveData<AuthState> getRegisterIsSuccessful() {
+        return registerIsSuccessful;
+    }
 }

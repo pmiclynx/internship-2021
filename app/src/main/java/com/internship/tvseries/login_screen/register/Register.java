@@ -62,13 +62,15 @@ public class Register extends BaseActivity<RegisterViewModel> {
 
             //data is validated
             Toast.makeText(Register.this, "Data Validated", Toast.LENGTH_SHORT).show();
-            //register the user with firebase
-            viewModel.register(Email, Password).addOnSuccessListener(authResult -> {
-                //send user on next page
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
-
-            }).addOnFailureListener(e -> Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_SHORT).show());
+            //register the user
+            viewModel.register(Email, Password);
+            viewModel.registerSuccess.observe(this, authState -> {
+                if (authState.isSuccessful()) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                } else
+                    Toast.makeText(Register.this, authState.getErrorMessage(), Toast.LENGTH_SHORT).show();
+            });
         });
 
         binding.ScndLoginBtn.setOnClickListener(v -> {

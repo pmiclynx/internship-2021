@@ -4,16 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.internship.tvseries.data.repository.FirebaseAuthRepository;
+import com.internship.tvseries.data.repository.AuthRepository;
 
 import org.jetbrains.annotations.NotNull;
 
 public class RegisterViewModelFactory implements ViewModelProvider.Factory {
 
-    private FirebaseAuthRepository authRepository;
+    private AuthRepository authRepository;
 
-    public RegisterViewModelFactory(FirebaseAuthRepository authRepository) {
+    public RegisterViewModelFactory(AuthRepository authRepository) {
         this.authRepository = authRepository;
     }
 

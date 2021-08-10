@@ -1,4 +1,4 @@
-package com.internship.tvseries.ui.splash_screen;
+package com.internship.tvseries.ui.splash;
 
 import android.content.Intent;
 import android.os.Bundle;

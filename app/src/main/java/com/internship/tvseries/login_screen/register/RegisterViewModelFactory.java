@@ -4,13 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.internship.tvseries.data.repository.AuthRepository;
+import com.internship.tvseries.data.repository.auth.AuthRepository;
 
 import org.jetbrains.annotations.NotNull;
 
 public class RegisterViewModelFactory implements ViewModelProvider.Factory {
 
-    private AuthRepository authRepository;
+    private final AuthRepository authRepository;
 
     public RegisterViewModelFactory(AuthRepository authRepository) {
         this.authRepository = authRepository;

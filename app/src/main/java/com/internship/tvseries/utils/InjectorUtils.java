@@ -2,11 +2,10 @@ package com.internship.tvseries.utils;
 
 import android.content.Context;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.internship.tvseries.data.api.ApiClient;
 import com.internship.tvseries.data.repository.FavoritesRepository;
-import com.internship.tvseries.data.repository.FirebaseAuthRepository;
 import com.internship.tvseries.data.repository.TvDetailsRepository;
+import com.internship.tvseries.data.repository.auth.FirebaseAuthRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 import com.internship.tvseries.login_screen.register.RegisterViewModelFactory;
 import com.internship.tvseries.ui.details.DetailsViewModelFactory;

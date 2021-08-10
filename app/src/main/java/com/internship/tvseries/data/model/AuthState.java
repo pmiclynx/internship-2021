@@ -1,6 +1,5 @@
 package com.internship.tvseries.data.model;
 
-//This class
 public class AuthState {
     private boolean isSuccessful;
     private String errorMessage;
@@ -8,6 +7,14 @@ public class AuthState {
     public AuthState() {
         isSuccessful = false;
         errorMessage = "";
+    }
+
+    public AuthState(boolean isSuccessful) {
+        this.isSuccessful = isSuccessful;
+    }
+
+    public AuthState(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public boolean isSuccessful() {

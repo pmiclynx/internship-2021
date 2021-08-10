@@ -61,7 +61,7 @@ public class Register extends BaseActivity<RegisterViewModel> {
             }
 
             //data is validated
-            Toast.makeText(Register.this, "Data Validated", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(Register.this, "Data Validated", Toast.LENGTH_SHORT).show();
             //register the user
             viewModel.register(Email, Password);
             viewModel.registerSuccess.observe(this, authState -> {

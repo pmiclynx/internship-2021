@@ -2,14 +2,11 @@ package com.internship.tvseries.ui.details;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.internship.tvseries.data.model.TvDetailsResponse;
+import com.internship.tvseries.data.repository.FavoritesRepository;
 import com.internship.tvseries.data.repository.TvDetailsRepository;
 import com.internship.tvseries.ui.base.BaseViewModel;
 
@@ -22,25 +19,15 @@ import retrofit2.Response;
 public class DetailsViewModel extends BaseViewModel {
 
     private final TvDetailsRepository detailsRepository;
+    private final FavoritesRepository favoritesRepository;
 
     private final MutableLiveData<TvDetailsResponse> _tvDetails = new MutableLiveData<>();
 
-    public LiveData<TvDetailsResponse> tvDetails = new LiveData<TvDetailsResponse>() {
-        @Nullable
-        @org.jetbrains.annotations.Nullable
-        @Override
-        public TvDetailsResponse getValue() {
-            return _tvDetails.getValue();
-        }
+    public LiveData<TvDetailsResponse> tvDetails = _tvDetails;
 
-        @Override
-        public void observe(@NonNull @NotNull LifecycleOwner owner, @NonNull @NotNull Observer<? super TvDetailsResponse> observer) {
-            _tvDetails.observe(owner, observer);
-        }
-    };
-
-    public DetailsViewModel(TvDetailsRepository detailsRepository, int id) {
+    public DetailsViewModel(TvDetailsRepository detailsRepository, FavoritesRepository favoritesRepository, int id) {
         this.detailsRepository = detailsRepository;
+        this.favoritesRepository = favoritesRepository;
         setTv(id);
     }
 
@@ -62,5 +49,16 @@ public class DetailsViewModel extends BaseViewModel {
                 Log.e("DetailsViewModel", t.getMessage());
             }
         });
+    }
+
+    public void checkIfAlreadyAdded(int id, DetailsActivity.FindTvListener listener) {
+        new Thread(() -> {
+            if (favoritesRepository.findById(id) != null)
+                listener.onReceived(true);
+        }).start();
+    }
+
+    public void addFavorite(TvDetailsResponse tv) {
+        new Thread(() -> favoritesRepository.insert(tv)).start();
     }
 }

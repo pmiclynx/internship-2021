@@ -1,8 +1,6 @@
 package com.internship.tvseries.ui.details;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -32,7 +30,7 @@ public class DetailsActivity extends BaseActivity<DetailsViewModel> {
     @Override
     public DetailsViewModel createViewModel() {
         int id = getIntent().getExtras().getInt("id");
-        DetailsViewModelFactory factory = InjectorUtils.getInstance().provideDetailsViewModelFactory(id);
+        DetailsViewModelFactory factory = InjectorUtils.getInstance().provideDetailsViewModelFactory(id, getApplicationContext());
         return new ViewModelProvider(this, factory).get(DetailsViewModel.class);
     }
 
@@ -61,37 +59,14 @@ public class DetailsActivity extends BaseActivity<DetailsViewModel> {
         binding.tvStatus.setText(tv.getStatus());
         binding.tvTagline.setText(tv.getTagline());
 
+        listener = found -> DetailsActivity.this.runOnUiThread(() -> {
+            binding.btnAddFavorite.setEnabled(false);
+        });
+        viewModel.checkIfAlreadyAdded(tv.getId(), listener);
 
-        listener = new FindTvListener() {
-            @Override
-            public void onReceived(boolean found) {
-                DetailsActivity.this.runOnUiThread(() -> {
-                    if (found) binding.btnAddFavorite.setEnabled(false);
-                });
-            }
-        };
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (repo.findById(tv.getId()) != null)
-                    listener.onReceived(true);
-            }
-        }).start();
-
-
-        binding.btnAddFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        repo.insert(tv);
-                    }
-                }).start();
-
-                binding.btnAddFavorite.setEnabled(false);
-            }
+        binding.btnAddFavorite.setOnClickListener(view -> {
+            viewModel.addFavorite(tv);
+            binding.btnAddFavorite.setEnabled(false);
         });
     }
 

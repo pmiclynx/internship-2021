@@ -1,7 +1,11 @@
 package com.internship.tvseries.utils;
 
+import android.content.Context;
+
 import com.internship.tvseries.data.api.ApiClient;
+import com.internship.tvseries.data.repository.FavoritesRepository;
 import com.internship.tvseries.data.repository.TvDetailsRepository;
+import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 import com.internship.tvseries.ui.details.DetailsViewModelFactory;
 
 public class InjectorUtils {
@@ -17,8 +21,9 @@ public class InjectorUtils {
         return instance;
     }
 
-    public DetailsViewModelFactory provideDetailsViewModelFactory(int id) {
-        TvDetailsRepository repository = TvDetailsRepository.getInstance(ApiClient.getTvDetailsApi());
-        return new DetailsViewModelFactory(repository, id);
+    public DetailsViewModelFactory provideDetailsViewModelFactory(int id, Context context) {
+        TvDetailsRepository tvDetailsRepository = TvDetailsRepository.getInstance(ApiClient.getTvDetailsApi());
+        FavoritesRepository favoritesRepository= FavoritesRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao());
+        return new DetailsViewModelFactory(tvDetailsRepository, favoritesRepository, id);
     }
 }

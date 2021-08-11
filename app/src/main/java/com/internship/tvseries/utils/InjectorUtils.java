@@ -5,7 +5,9 @@ import android.content.Context;
 import com.internship.tvseries.data.api.ApiClient;
 import com.internship.tvseries.data.repository.FavoritesRepository;
 import com.internship.tvseries.data.repository.TvDetailsRepository;
+import com.internship.tvseries.data.repository.auth.FirebaseAuthRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
+import com.internship.tvseries.login_screen.register.RegisterViewModelFactory;
 import com.internship.tvseries.ui.details.DetailsViewModelFactory;
 
 public class InjectorUtils {
@@ -25,5 +27,9 @@ public class InjectorUtils {
         TvDetailsRepository tvDetailsRepository = TvDetailsRepository.getInstance(ApiClient.getTvDetailsApi());
         FavoritesRepository favoritesRepository= FavoritesRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao());
         return new DetailsViewModelFactory(tvDetailsRepository, favoritesRepository, id);
+    }
+
+    public RegisterViewModelFactory provideRegisterViewModelFactory() {
+        return new RegisterViewModelFactory(FirebaseAuthRepository.getInstance());
     }
 }

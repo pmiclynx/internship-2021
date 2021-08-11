@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.internship.tvseries.MainActivity;
 import com.internship.tvseries.databinding.ActivityRegisterBinding;
-import com.internship.tvseries.login_screen.Login;
+import com.internship.tvseries.login_screen.login.LoginActivity;
 import com.internship.tvseries.ui.base.BaseActivity;
 import com.internship.tvseries.utils.InjectorUtils;
 
@@ -74,7 +74,7 @@ public class RegisterActivity extends BaseActivity<RegisterViewModel> {
         });
 
         binding.ScndLoginBtn.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), Login.class));
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finish();
         });
     }

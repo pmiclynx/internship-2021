@@ -15,7 +15,7 @@
             android:name="com.internship.tvseries.login_screen.register.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name="com.internship.tvseries.login_screen.Login"
+            android:name="com.internship.tvseries.login_screen.login.LoginActivity"
             android:exported="true" />
         <activity android:name=".ui.details.DetailsActivity"
             android:parentActivityName=".MainActivity"/>

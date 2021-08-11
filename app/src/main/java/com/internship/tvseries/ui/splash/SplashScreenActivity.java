@@ -7,7 +7,7 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.internship.tvseries.R;
-import com.internship.tvseries.login_screen.Login;
+import com.internship.tvseries.login_screen.login.LoginActivity;
 import com.internship.tvseries.utils.Constants;
 
 
@@ -22,7 +22,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         boolean h = new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(getApplicationContext(), Login.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
             }
         }, 2000);

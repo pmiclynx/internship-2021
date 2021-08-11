@@ -3,12 +3,13 @@ package com.internship.tvseries.data.repository.auth;
 import com.google.firebase.auth.FirebaseAuth;
 import com.internship.tvseries.data.model.AuthState;
 
+import java.util.function.Consumer;
+
 //Authentication repository using Firebase
 public class FirebaseAuthRepository implements AuthRepository {
 
     private static FirebaseAuthRepository instance = null;
     private final FirebaseAuth firebaseAuth;
-    private AuthenticationSuccessListener listener;
 
     private FirebaseAuthRepository() {
         firebaseAuth = FirebaseAuth.getInstance();
@@ -21,14 +22,10 @@ public class FirebaseAuthRepository implements AuthRepository {
     }
 
     @Override
-    public void register(String email, String password) {
+    public void register(String email, String password, Consumer<AuthState> consumer) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener(authResult -> listener.onReceived(new AuthState(true)))
-                .addOnFailureListener(e -> listener.onReceived(new AuthState(e.getMessage())));
+                .addOnSuccessListener(authResult -> consumer.accept(new AuthState(true)))
+                .addOnFailureListener(e -> consumer.accept(new AuthState(e.getMessage())));
     }
 
-    @Override
-    public void addAuthenticationSuccessListener(AuthenticationSuccessListener listener) {
-        this.listener = listener;
-    }
 }

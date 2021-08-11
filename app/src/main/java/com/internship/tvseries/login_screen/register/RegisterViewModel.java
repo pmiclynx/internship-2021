@@ -15,10 +15,9 @@ public class RegisterViewModel extends BaseViewModel {
 
     public RegisterViewModel(AuthRepository authRepository) {
         this.authRepository = authRepository;
-        authRepository.addAuthenticationSuccessListener(_registerSuccess::postValue);
     }
 
     public void register(String email, String password) {
-        authRepository.register(email, password);
+        authRepository.register(email, password, _registerSuccess::postValue);
     }
 }

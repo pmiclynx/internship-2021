@@ -15,7 +15,7 @@ import com.internship.tvseries.utils.InjectorUtils;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Register extends BaseActivity<RegisterViewModel> {
+public class RegisterActivity extends BaseActivity<RegisterViewModel> {
 
     private ActivityRegisterBinding binding;
 
@@ -40,7 +40,7 @@ public class Register extends BaseActivity<RegisterViewModel> {
                 startActivity(intent);
                 finish();
             } else
-                Toast.makeText(Register.this, authState.getErrorMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, authState.getErrorMessage(), Toast.LENGTH_SHORT).show();
         });
 
         binding.RegisterButton.setOnClickListener(v -> {

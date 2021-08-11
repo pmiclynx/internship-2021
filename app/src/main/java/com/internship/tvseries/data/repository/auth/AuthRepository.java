@@ -1,6 +1,5 @@
 package com.internship.tvseries.data.repository.auth;
 
-import com.google.firebase.auth.AuthResult;
 import com.internship.tvseries.data.model.AuthState;
 
 import java.util.function.Consumer;

@@ -1,20 +1,12 @@
 package com.internship.tvseries.ui.details;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.internship.tvseries.data.model.TvDetailsResponse;
 import com.internship.tvseries.data.repository.FavoritesRepository;
-import com.internship.tvseries.data.repository.TvDetailsRepository;
+import com.internship.tvseries.data.repository.details.TvDetailsRepository;
 import com.internship.tvseries.ui.base.BaseViewModel;
-
-import org.jetbrains.annotations.NotNull;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DetailsViewModel extends BaseViewModel {
 
@@ -32,23 +24,7 @@ public class DetailsViewModel extends BaseViewModel {
     }
 
     private void setTv(int id) {
-        Call<TvDetailsResponse> responseCall = detailsRepository.getTvDetails(id);
-        responseCall.enqueue(new Callback<TvDetailsResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<TvDetailsResponse> call, @NotNull Response<TvDetailsResponse> response) {
-                if (response.code() == 200) {
-                    TvDetailsResponse tv = response.body();
-                    if (tv != null)
-                        _tvDetails.postValue(tv);
-                } else
-                    Log.i("DetailsViewModel", response.message());
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<TvDetailsResponse> call, @NotNull Throwable t) {
-                Log.e("DetailsViewModel", t.getMessage());
-            }
-        });
+        detailsRepository.getTvDetails(id, _tvDetails::postValue);
     }
 
     public void checkIfAlreadyAdded(int id, DetailsActivity.FindTvListener listener) {

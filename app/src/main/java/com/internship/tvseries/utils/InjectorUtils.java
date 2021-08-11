@@ -5,7 +5,7 @@ import android.content.Context;
 import com.internship.tvseries.data.api.ApiClient;
 import com.internship.tvseries.data.repository.FavoritesRepository;
 import com.internship.tvseries.data.repository.TvDetailsRepository;
-import com.internship.tvseries.data.repository.TvRepository;
+import com.internship.tvseries.data.repository.TvRetrofitRepository;
 import com.internship.tvseries.data.repository.auth.FirebaseAuthRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 import com.internship.tvseries.login_screen.register.RegisterViewModelFactory;
@@ -36,6 +36,6 @@ public class InjectorUtils {
     }
 
     public TopRatedViewModelFactory provideTopRatedViewModelFactory() {
-        return new TopRatedViewModelFactory(TvRepository.getInstance(ApiClient.getMovieApi()));
+        return new TopRatedViewModelFactory(TvRetrofitRepository.getInstance(ApiClient.getMovieApi()));
     }
 }

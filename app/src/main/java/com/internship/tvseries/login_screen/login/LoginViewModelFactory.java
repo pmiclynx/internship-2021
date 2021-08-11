@@ -1,18 +1,16 @@
-package com.internship.tvseries.login_screen;
+package com.internship.tvseries.login_screen.login;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.internship.tvseries.data.repository.LoginRepository;
-import com.internship.tvseries.login_screen.viewmodel.LoginViewModel;
+import com.internship.tvseries.data.repository.FirebaseLoginRepository;
+import com.internship.tvseries.login_screen.login.viewmodel.LoginViewModel;
 
 public class LoginViewModelFactory implements ViewModelProvider.Factory {
 
+private final FirebaseLoginRepository userRepository;
 
-private final LoginRepository userRepository;
-
-
- public LoginViewModelFactory( LoginRepository userRepository) {
+ public LoginViewModelFactory( FirebaseLoginRepository userRepository) {
         this.userRepository = userRepository;
         }
 

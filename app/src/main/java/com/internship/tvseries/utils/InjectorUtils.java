@@ -9,6 +9,7 @@ import com.internship.tvseries.data.repository.TvRetrofitRepository;
 import com.internship.tvseries.data.repository.auth.FirebaseAuthRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 import com.internship.tvseries.login_screen.register.RegisterViewModelFactory;
+import com.internship.tvseries.ui.Popular.PopularViewModelFactory;
 import com.internship.tvseries.ui.TopRated.TopRatedViewModelFactory;
 import com.internship.tvseries.ui.details.DetailsViewModelFactory;
 
@@ -37,5 +38,9 @@ public class InjectorUtils {
 
     public TopRatedViewModelFactory provideTopRatedViewModelFactory() {
         return new TopRatedViewModelFactory(TvRetrofitRepository.getInstance(ApiClient.getMovieApi()));
+    }
+
+    public PopularViewModelFactory providePopularViewModelFactory() {
+        return new PopularViewModelFactory(TvRetrofitRepository.getInstance(ApiClient.getMovieApi()));
     }
 }

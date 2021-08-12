@@ -12,6 +12,7 @@ import retrofit2.Response;
 public final class Constants {
     public final static String BASE_URL = "https://api.themoviedb.org/3/";
     public final static String API_KEY = "3133b12095185ad24d14551d402e8a5c";
+    public static final String CATEGORY_POPULAR = "popular";
     public static String IMAGE_BASE_URL;
     public final static String CATEGORY_TOP_RATED = "top_rated";
 

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.internship.tvseries.data.model.Result;
+import com.internship.tvseries.ui.details.DetailsActivity;
 import com.internship.tvseries.utils.Constants;
 
 import java.util.ArrayList;

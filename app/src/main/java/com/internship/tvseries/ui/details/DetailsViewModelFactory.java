@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.internship.tvseries.data.repository.FavoritesRepository;
-import com.internship.tvseries.data.repository.TvDetailsRepository;
+import com.internship.tvseries.data.repository.details.TvDetailsRepository;
 
 import org.jetbrains.annotations.NotNull;
 

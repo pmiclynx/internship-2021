@@ -1,9 +1,10 @@
 package com.internship.tvseries.data.api;
+
 import com.internship.tvseries.data.model.MoviesList;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface MovieApi {
 

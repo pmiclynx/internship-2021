@@ -19,12 +19,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         Constants.setImageBaseUrl();
 
-        boolean h = new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
-            }
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
         }, 2000);
     }
 }

@@ -3,15 +3,11 @@ package com.internship.tvseries.ui.favorites;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.internship.tvseries.data.model.Result;
 import com.internship.tvseries.data.model.TvDetailsResponse;
-import com.internship.tvseries.data.repository.TvRepository;
 import com.internship.tvseries.data.repository.favorites.FavoritesRepository;
 import com.internship.tvseries.ui.base.BaseViewModel;
-import com.internship.tvseries.utils.Constants;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class FavoritesViewModel extends BaseViewModel {
     private final FavoritesRepository favoritesRepository;
@@ -25,12 +21,11 @@ public class FavoritesViewModel extends BaseViewModel {
     }
 
     public void getFavorites(){
-        favoritesRepository.getAll(new Consumer<List<TvDetailsResponse>>() {
-            @Override
-            public void accept(List<TvDetailsResponse> tvDetailsResponses) {
-                _favTvs.postValue(tvDetailsResponses);
-            }
-        });
+        favoritesRepository.getAll(tvDetailsResponses -> _favTvs.postValue(tvDetailsResponses));
+    }
+
+    public void delete(TvDetailsResponse tvDetailsResponse) {
+        favoritesRepository.delete(tvDetailsResponse);
     }
 
 }

@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.internship.tvseries.R;
 import com.internship.tvseries.data.model.TvDetailsResponse;
-import com.internship.tvseries.data.repository.favorites.FavoritesRoomRepository;
-import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 import com.internship.tvseries.utils.Constants;
 
 import java.util.ArrayList;
@@ -29,6 +27,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
 
     public interface ItemClickListener {
         void onItemClicked(int id);
+        void onItemDelete(TvDetailsResponse tv);
     }
 
     public FavAdapter(Context context, List<TvDetailsResponse> movieResult, ItemClickListener listener) {
@@ -46,7 +45,6 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
         view = layoutInflater.inflate(R.layout.card_view_fav, parent, false);
 
         return new ViewHolder(view);
-
     }
 
     @Override
@@ -54,24 +52,12 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
         TvDetailsResponse item = movieResult.get(position);
         holder.Bind(item);
 
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onItemClicked(item.getId());
-            }
-        });
-        holder.delBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteItem(item);
-            }
-        });
+        holder.view.setOnClickListener(v -> listener.onItemClicked(item.getId()));
+        holder.delBtn.setOnClickListener(v -> deleteItem(item));
     }
 
     private void deleteItem(TvDetailsResponse item) {
-        FavoritesRoomRepository repo = FavoritesRoomRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao());
-
-        new Thread(() -> repo.delete(item)).start();
+        listener.onItemDelete(item);
         movieResult.remove(item);
         notifyDataSetChanged();
     }
@@ -87,7 +73,6 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
         TextView movieTitle, movieRate, releaseDate;
         ImageView movieImg;
         ImageButton delBtn;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

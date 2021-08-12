@@ -8,25 +8,24 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.internship.tvseries.R;
 import com.internship.tvseries.data.model.TvDetailsResponse;
-import com.internship.tvseries.data.repository.favorites.FavoritesRoomRepository;
-import com.internship.tvseries.data.repository.db.FavoritesDatabase;
+import com.internship.tvseries.databinding.FragmentFavoritesBinding;
 import com.internship.tvseries.ui.base.BaseFragment;
 import com.internship.tvseries.ui.details.DetailsActivity;
 import com.internship.tvseries.utils.InjectorUtils;
 
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 
 public class FavoritesFragment extends BaseFragment<FavoritesViewModel> {
+
+    private FragmentFavoritesBinding binding;
 
     @NonNull
     @Override
@@ -35,22 +34,11 @@ public class FavoritesFragment extends BaseFragment<FavoritesViewModel> {
         return new ViewModelProvider(this, favoritesViewModelFactory).get(FavoritesViewModel.class);
     }
 
-    //public static String BASE_URL = "https://api.themoviedb.org/3/";
-
-
-    private RecyclerView recyclerView;
-    private List<TvDetailsResponse> movieList = new ArrayList<>();
-    private MoviesListener listener;
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
-
-
-        return view;
+        binding = FragmentFavoritesBinding.inflate(inflater, container, false);
+        return binding.getRoot();
 }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstance) {
@@ -58,8 +46,7 @@ public class FavoritesFragment extends BaseFragment<FavoritesViewModel> {
         viewModel.favTvs.observe(getViewLifecycleOwner(), new Observer<List<TvDetailsResponse>>() {
             @Override
             public void onChanged(List<TvDetailsResponse> tvDetailsResponses) {
-                recyclerView = view.findViewById(R.id.recycler_vfavorites);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                binding.recyclerVfavorites.setLayoutManager(new LinearLayoutManager(getContext()));
                 FavAdapter adapter = new FavAdapter(getContext(), tvDetailsResponses, new FavAdapter.ItemClickListener() {
                     @Override
                     public void onItemClicked(int id) {
@@ -67,18 +54,14 @@ public class FavoritesFragment extends BaseFragment<FavoritesViewModel> {
                         intent.putExtra("id", id);
                         startActivity(intent);
                     }
+
+                    @Override
+                    public void onItemDelete(TvDetailsResponse tv) {
+                        viewModel.delete(tv);
+                    }
                 });
-                recyclerView.setAdapter(adapter);
+                binding.recyclerVfavorites.setAdapter(adapter);
             }
             });
-
-
     }
-
-
-
-    public interface MoviesListener {
-        void onReceived(List<TvDetailsResponse> movies);
-    }
-
 }

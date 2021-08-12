@@ -24,30 +24,25 @@ public class FavoritesRoomRepository implements FavoritesRepository {
 
     @Override
     public void insert(TvDetailsResponse result) {
-        new Thread(() -> favoritesDao.insertFavorite(result));
+        new Thread(() -> favoritesDao.insertFavorite(result)).start();
     }
 
     @Override
     public void delete(TvDetailsResponse result) {
-        new Thread(() -> favoritesDao.deleteFavorite(result));
+        new Thread(() -> favoritesDao.deleteFavorite(result)).start();
 
     }
 
     @Override
     public void getAll(Consumer<List<TvDetailsResponse>> consumer) {
-        consumer.accept(favoritesDao.getAllFavorites());
+        new Thread(() -> {
+            List<TvDetailsResponse> tvs = favoritesDao.getAllFavorites();
+            consumer.accept(tvs);
+        }).start();
     }
 
     @Override
     public void findById(int id, Consumer<TvDetailsResponse> consumer) {
-        consumer.accept(favoritesDao.findById(id));
+        new Thread(() -> consumer.accept(favoritesDao.findById(id))).start();
     }
-//
-//    public List<TvDetailsResponse> getAll() {
-//        return favoritesDao.getAllFavorites();
-//    }
-//
-//    public TvDetailsResponse findById(int id) {
-//        return favoritesDao.findById(id);
-//    }
 }

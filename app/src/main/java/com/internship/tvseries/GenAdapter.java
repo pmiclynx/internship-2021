@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.internship.tvseries.data.model.Result;
-import com.internship.tvseries.ui.details.DetailsActivity;
 import com.internship.tvseries.utils.Constants;
 
 import java.util.ArrayList;
@@ -50,12 +49,7 @@ public class GenAdapter extends RecyclerView.Adapter<GenAdapter.ViewHolder> {
         Result item = movieResult.get(position);
         holder.Bind(item);
 
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onItemClicked(item.getId());
-            }
-        });
+        holder.view.setOnClickListener(v -> listener.onItemClicked(item.getId()));
     }
 
     @Override

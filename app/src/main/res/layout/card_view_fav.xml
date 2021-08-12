@@ -52,10 +52,11 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <EditText
+                    <TextView
                         android:id="@+id/rating"
                         android:layout_width="59dp"
                         android:layout_height="match_parent"
+                        android:gravity="center"
                         android:inputType="textPersonName"
                         android:text="Rating:"
                         android:textSize="16dp" />
@@ -86,11 +87,12 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <EditText
+                        <TextView
                             android:id="@+id/r_date"
                             android:layout_width="112dp"
                             android:layout_height="wrap_content"
                             android:ems="10"
+                            android:gravity="center"
                             android:inputType="textPersonName"
                             android:text="Release Date:"
                             android:textSize="16dp"

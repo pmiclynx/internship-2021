@@ -3,6 +3,7 @@ package com.internship.tvseries.utils;
 import android.content.Context;
 
 import com.internship.tvseries.data.api.ApiClient;
+import com.internship.tvseries.data.repository.favorites.FavoritesDao;
 import com.internship.tvseries.data.repository.favorites.FavoritesRoomRepository;
 import com.internship.tvseries.data.repository.TvRetrofitRepository;
 import com.internship.tvseries.data.repository.details.TvDetailsRepository;
@@ -13,6 +14,8 @@ import com.internship.tvseries.login_screen.register.RegisterViewModelFactory;
 import com.internship.tvseries.ui.Popular.PopularViewModelFactory;
 import com.internship.tvseries.ui.TopRated.TopRatedViewModelFactory;
 import com.internship.tvseries.ui.details.DetailsViewModelFactory;
+import com.internship.tvseries.ui.favorites.FavoritesViewModel;
+import com.internship.tvseries.ui.favorites.FavoritesViewModelFactory;
 
 public class InjectorUtils {
 
@@ -43,5 +46,9 @@ public class InjectorUtils {
 
     public PopularViewModelFactory providePopularViewModelFactory() {
         return new PopularViewModelFactory(TvRetrofitRepository.getInstance(ApiClient.getMovieApi()));
+    }
+
+    public FavoritesViewModelFactory provideFavoritesViewModelFactory(Context context) {
+        return new FavoritesViewModelFactory(FavoritesRoomRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao()));
     }
 }

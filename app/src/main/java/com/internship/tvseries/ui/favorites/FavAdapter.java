@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.internship.tvseries.R;
 import com.internship.tvseries.data.model.TvDetailsResponse;
-import com.internship.tvseries.data.repository.FavoritesRepository;
+import com.internship.tvseries.data.repository.favorites.FavoritesRoomRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 import com.internship.tvseries.utils.Constants;
 
@@ -69,7 +69,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
     }
 
     private void deleteItem(TvDetailsResponse item) {
-        FavoritesRepository repo = FavoritesRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao());
+        FavoritesRoomRepository repo = FavoritesRoomRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao());
 
         new Thread(() -> repo.delete(item)).start();
         movieResult.remove(item);

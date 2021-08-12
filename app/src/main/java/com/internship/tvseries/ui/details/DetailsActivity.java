@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.internship.tvseries.data.model.TvDetailsResponse;
-import com.internship.tvseries.data.repository.FavoritesRepository;
+import com.internship.tvseries.data.repository.favorites.FavoritesRoomRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 import com.internship.tvseries.databinding.ActivityDetailsBinding;
 import com.internship.tvseries.ui.base.BaseActivity;
@@ -44,7 +44,7 @@ public class DetailsActivity extends BaseActivity<DetailsViewModel> {
     }
 
     private void bindUI(TvDetailsResponse tv) {
-        FavoritesRepository repo = FavoritesRepository.getInstance(FavoritesDatabase.getInstance(getApplicationContext()).favoritesDao());
+        FavoritesRoomRepository repo = FavoritesRoomRepository.getInstance(FavoritesDatabase.getInstance(getApplicationContext()).favoritesDao());
         Glide.with(getApplicationContext())
                 .load(Constants.IMAGE_BASE_URL + tv.getBackdropPath())
                 .into(binding.ivBackdrop);

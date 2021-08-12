@@ -12,10 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.internship.tvseries.GenAdapter;
 import com.internship.tvseries.R;
 import com.internship.tvseries.data.model.TvDetailsResponse;
-import com.internship.tvseries.data.repository.FavoritesRepository;
+import com.internship.tvseries.data.repository.favorites.FavoritesRoomRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 import com.internship.tvseries.ui.details.DetailsActivity;
 
@@ -63,7 +62,7 @@ public class FavoritesFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                movieList = FavoritesRepository.getInstance(FavoritesDatabase.getInstance(getContext()).favoritesDao()).getAll();
+                movieList = FavoritesRoomRepository.getInstance(FavoritesDatabase.getInstance(getContext()).favoritesDao()).getAll();
                 listener.onReceived(movieList);
             }
         }).start();

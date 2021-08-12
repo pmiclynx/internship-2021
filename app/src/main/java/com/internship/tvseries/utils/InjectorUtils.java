@@ -3,7 +3,7 @@ package com.internship.tvseries.utils;
 import android.content.Context;
 
 import com.internship.tvseries.data.api.ApiClient;
-import com.internship.tvseries.data.repository.FavoritesRepository;
+import com.internship.tvseries.data.repository.favorites.FavoritesRoomRepository;
 import com.internship.tvseries.data.repository.TvRetrofitRepository;
 import com.internship.tvseries.data.repository.details.TvDetailsRepository;
 import com.internship.tvseries.data.repository.details.TvDetailsRetrofitRepository;
@@ -29,8 +29,8 @@ public class InjectorUtils {
 
     public DetailsViewModelFactory provideDetailsViewModelFactory(int id, Context context) {
         TvDetailsRepository tvDetailsRepository = TvDetailsRetrofitRepository.getInstance(ApiClient.getTvDetailsApi());
-        FavoritesRepository favoritesRepository= FavoritesRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao());
-        return new DetailsViewModelFactory(tvDetailsRepository, favoritesRepository, id);
+        FavoritesRoomRepository favoritesRoomRepository = FavoritesRoomRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao());
+        return new DetailsViewModelFactory(tvDetailsRepository, favoritesRoomRepository, id);
     }
 
     public RegisterViewModelFactory provideRegisterViewModelFactory() {

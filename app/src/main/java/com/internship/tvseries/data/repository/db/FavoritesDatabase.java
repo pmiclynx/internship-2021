@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.internship.tvseries.data.model.TvDetailsResponse;
-import com.internship.tvseries.data.repository.FavoritesDao;
+import com.internship.tvseries.data.repository.favorites.FavoritesDao;
 
 @Database(entities = {TvDetailsResponse.class}, version = 1)
 public abstract class FavoritesDatabase extends RoomDatabase {

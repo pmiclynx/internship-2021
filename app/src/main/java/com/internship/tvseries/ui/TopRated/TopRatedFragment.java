@@ -38,7 +38,6 @@ public class TopRatedFragment extends BaseFragment<TopRatedViewModel> {
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentTopRatedBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }

@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.internship.tvseries.data.repository.FavoritesRepository;
 import com.internship.tvseries.data.repository.details.TvDetailsRepository;
+import com.internship.tvseries.data.repository.favorites.FavoritesRepository;
 
 import org.jetbrains.annotations.NotNull;
 

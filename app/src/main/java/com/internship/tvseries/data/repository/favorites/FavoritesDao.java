@@ -1,4 +1,4 @@
-package com.internship.tvseries.data.repository;
+package com.internship.tvseries.data.repository.favorites;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

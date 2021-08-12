@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.internship.tvseries.data.repository.TvRepository;
-import com.internship.tvseries.ui.TopRated.TopRatedViewModel;
 
 public class PopularViewModelFactory implements ViewModelProvider.Factory {
 
@@ -15,6 +14,7 @@ public class PopularViewModelFactory implements ViewModelProvider.Factory {
 
     @NonNull
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(PopularViewModel.class))
             return (T) new PopularViewModel(tvRepository);

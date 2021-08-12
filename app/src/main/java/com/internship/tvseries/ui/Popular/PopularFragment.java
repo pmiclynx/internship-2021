@@ -71,7 +71,6 @@ public class PopularFragment extends BaseFragment<PopularViewModel> {
             startActivity(intent);
         });
         binding.recyclerVpopular.setAdapter(adapter);
-        binding.recyclerVpopular.setHasFixedSize(true);
     }
 
 

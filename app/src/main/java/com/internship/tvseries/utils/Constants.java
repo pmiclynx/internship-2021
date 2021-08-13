@@ -1,8 +1,8 @@
 package com.internship.tvseries.utils;
 
 import com.internship.tvseries.data.api.ApiClient;
-import com.internship.tvseries.data.repository.config.ConfigBackendRepository;
-import com.internship.tvseries.data.repository.config.ConfigRetrofitRepository;
+import com.internship.tvseries.data.repository.config.LynxConfigRepository;
+import com.internship.tvseries.data.repository.config.TheMovieDbConfigRepository;
 
 public final class Constants {
     public final static String BASE_URL = "https://api.themoviedb.org/3/";
@@ -12,9 +12,9 @@ public final class Constants {
     public final static String CATEGORY_TOP_RATED = "top_rated";
 
     public static void setImageBaseUrl() {
-        ConfigBackendRepository.getInstance().getConfig(configuration -> {
+        LynxConfigRepository.getInstance().getConfig(configuration -> {
             if (configuration == null) {
-                ConfigRetrofitRepository.getInstance(ApiClient.getConfigApi()).getConfig(configuration1 ->
+                TheMovieDbConfigRepository.getInstance(ApiClient.getConfigApi()).getConfig(configuration1 ->
                         IMAGE_BASE_URL = configuration1.getImages().getSecureBaseUrl() + configuration1.getImages().getPosterSizes().get(5));
             } else
                 IMAGE_BASE_URL = configuration.getImages().getSecureBaseUrl() + configuration.getImages().getPosterSizes().get(5);

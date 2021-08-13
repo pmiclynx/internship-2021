@@ -4,16 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.internship.tvseries.data.repository.auth.AuthRepository;
+import com.internship.tvseries.data.repository.auth.RemoteRegisterRepository;
 
 import org.jetbrains.annotations.NotNull;
 
 public class RegisterViewModelFactory implements ViewModelProvider.Factory {
 
-    private final AuthRepository authRepository;
+    private final RemoteRegisterRepository remoteRegisterRepository;
+    private final RemoteRegisterRepository lynxRegisterRepository;
 
-    public RegisterViewModelFactory(AuthRepository authRepository) {
-        this.authRepository = authRepository;
+    public RegisterViewModelFactory(RemoteRegisterRepository remoteRegisterRepository, RemoteRegisterRepository lynxRegisterRepository) {
+        this.remoteRegisterRepository = remoteRegisterRepository;
+        this.lynxRegisterRepository = lynxRegisterRepository;
     }
 
     @NonNull
@@ -22,7 +24,7 @@ public class RegisterViewModelFactory implements ViewModelProvider.Factory {
     @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull @NotNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(RegisterViewModel.class))
-            return (T) new RegisterViewModel(authRepository);
+            return (T) new RegisterViewModel(remoteRegisterRepository, lynxRegisterRepository);
         throw new IllegalArgumentException("Unknown View Model Class");
     }
 }

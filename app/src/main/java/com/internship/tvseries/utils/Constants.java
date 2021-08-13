@@ -1,13 +1,8 @@
 package com.internship.tvseries.utils;
 
 import com.internship.tvseries.data.api.ApiClient;
-import com.internship.tvseries.data.model.Configuration;
-
-import org.jetbrains.annotations.NotNull;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.internship.tvseries.data.repository.config.ConfigBackendRepository;
+import com.internship.tvseries.data.repository.config.ConfigRetrofitRepository;
 
 public final class Constants {
     public final static String BASE_URL = "https://api.themoviedb.org/3/";
@@ -17,15 +12,12 @@ public final class Constants {
     public final static String CATEGORY_TOP_RATED = "top_rated";
 
     public static void setImageBaseUrl() {
-        ApiClient.getConfigApi().getConfiguration().enqueue(new Callback<Configuration>() {
-            @Override
-            public void onResponse(@NotNull Call<Configuration> call, @NotNull Response<Configuration> response) {
-                IMAGE_BASE_URL = response.body().getImages().getSecureBaseUrl() + response.body().getImages().getPosterSizes().get(5);
-            }
-
-            @Override
-            public void onFailure(Call<Configuration> call, Throwable t) {
-            }
+        ConfigBackendRepository.getInstance().getConfig(configuration -> {
+            if (configuration == null) {
+                ConfigRetrofitRepository.getInstance(ApiClient.getConfigApi()).getConfig(configuration1 ->
+                        IMAGE_BASE_URL = configuration1.getImages().getSecureBaseUrl() + configuration1.getImages().getPosterSizes().get(5));
+            } else
+                IMAGE_BASE_URL = configuration.getImages().getSecureBaseUrl() + configuration.getImages().getPosterSizes().get(5);
         });
     }
 }

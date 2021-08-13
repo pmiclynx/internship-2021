@@ -26,7 +26,7 @@ public class TopRatedViewModel extends BaseViewModel {
     }
 
     private void getTopRated() {
-        tvRepository.getByCategory(Constants.CATEGORY_TOP_RATED, new Consumer<List<Result>>() {
+        backendTopRatedRepository.getByCategory(Constants.CATEGORY_TOP_RATED, new Consumer<List<Result>>() {
             @Override
             public void accept(List<Result> results) {
                 if(results.isEmpty()){

@@ -25,7 +25,7 @@ public class PopularViewModel extends BaseViewModel {
     }
 
     private void getPopular() {
-        tvRepository.getByCategory(Constants.CATEGORY_POPULAR, new Consumer<List<Result>>() {
+        backendPopularRepository.getByCategory(Constants.CATEGORY_POPULAR, new Consumer<List<Result>>() {
             @Override
             public void accept(List<Result> results) {
                 if(results.isEmpty()){

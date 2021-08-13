@@ -5,8 +5,8 @@ import android.content.Context;
 import com.internship.tvseries.data.api.ApiClient;
 import com.internship.tvseries.data.repository.TvRetrofitRepository;
 import com.internship.tvseries.data.repository.auth.FirebaseAuthRepository;
-import com.internship.tvseries.data.repository.backend.BackendPopularRepository;
-import com.internship.tvseries.data.repository.backend.BackendTopRatedRepository;
+import com.internship.tvseries.data.repository.backend.LynxPopularRepository;
+import com.internship.tvseries.data.repository.backend.LynxTopRatedRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
 import com.internship.tvseries.data.repository.details.TvDetailsRepository;
 import com.internship.tvseries.data.repository.details.TvDetailsRetrofitRepository;
@@ -42,11 +42,11 @@ public class InjectorUtils {
     }
 
     public TopRatedViewModelFactory provideTopRatedViewModelFactory() {
-        return new TopRatedViewModelFactory(TvRetrofitRepository.getInstance(ApiClient.getMovieApi()), new BackendTopRatedRepository());
+        return new TopRatedViewModelFactory(TvRetrofitRepository.getInstance(ApiClient.getMovieApi()), new LynxTopRatedRepository());
     }
 
     public PopularViewModelFactory providePopularViewModelFactory() {
-        return new PopularViewModelFactory(TvRetrofitRepository.getInstance(ApiClient.getMovieApi()), new BackendPopularRepository());
+        return new PopularViewModelFactory(TvRetrofitRepository.getInstance(ApiClient.getMovieApi()), new LynxPopularRepository());
     }
 
     public FavoritesViewModelFactory provideFavoritesViewModelFactory(Context context) {

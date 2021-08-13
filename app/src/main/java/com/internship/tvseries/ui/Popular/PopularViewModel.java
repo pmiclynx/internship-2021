@@ -40,7 +40,5 @@ public class PopularViewModel extends BaseViewModel {
                 }
             }
         });
-
     }
-
 }

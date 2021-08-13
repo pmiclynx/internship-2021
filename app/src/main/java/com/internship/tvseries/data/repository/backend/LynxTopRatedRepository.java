@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class BackendTopRatedRepository implements TvRepository {
+public class LynxTopRatedRepository implements TvRepository {
     @Override
     public void getByCategory(String category, Consumer<List<Result>> consumer) {
 

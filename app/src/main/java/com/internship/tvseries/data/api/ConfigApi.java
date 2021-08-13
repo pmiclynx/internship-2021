@@ -5,7 +5,7 @@ import com.internship.tvseries.data.model.Configuration;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface Config {
+public interface ConfigApi {
     @GET("configuration")
     Call<Configuration> getConfiguration();
 

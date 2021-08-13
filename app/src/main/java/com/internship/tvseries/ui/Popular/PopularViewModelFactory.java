@@ -9,15 +9,18 @@ import com.internship.tvseries.data.repository.TvRepository;
 public class PopularViewModelFactory implements ViewModelProvider.Factory {
 
     private final TvRepository tvRepository;
-
-    public PopularViewModelFactory(TvRepository tvRepository) { this.tvRepository = tvRepository; }
+    private final TvRepository backendPopularRepository;
+    public PopularViewModelFactory(TvRepository tvRepository, TvRepository backendPopularRepository) {
+        this.tvRepository = tvRepository;
+        this.backendPopularRepository=backendPopularRepository;
+    }
 
     @NonNull
     @Override
     @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(PopularViewModel.class))
-            return (T) new PopularViewModel(tvRepository);
+            return (T) new PopularViewModel(tvRepository,backendPopularRepository);
         throw new IllegalArgumentException("Unknown View Model Class");
     }
 }

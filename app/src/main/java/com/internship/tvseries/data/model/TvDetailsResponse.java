@@ -64,9 +64,7 @@ public class TvDetailsResponse{
 		return overview;
 	}
 
-	public int getNumberOfEpisodes(){
-		return numberOfEpisodes;
-	}
+	public int getNumberOfEpisodes(){ return numberOfEpisodes;}
 
 	public String getPosterPath(){
 		return posterPath;

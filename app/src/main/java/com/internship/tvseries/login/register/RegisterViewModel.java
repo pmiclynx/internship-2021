@@ -1,4 +1,4 @@
-package com.internship.tvseries.login_screen.register;
+package com.internship.tvseries.login.register;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,4 +1,4 @@
-package com.internship.tvseries.login_screen.login.viewmodel;
+package com.internship.tvseries.login.login.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;

@@ -1,10 +1,10 @@
-package com.internship.tvseries.login_screen.login;
+package com.internship.tvseries.login.login;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.internship.tvseries.data.repository.FirebaseLoginRepository;
-import com.internship.tvseries.login_screen.login.viewmodel.LoginViewModel;
+import com.internship.tvseries.login.login.viewmodel.LoginViewModel;
 
 public class LoginViewModelFactory implements ViewModelProvider.Factory {
 

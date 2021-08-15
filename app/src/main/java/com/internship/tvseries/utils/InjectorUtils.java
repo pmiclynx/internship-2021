@@ -12,7 +12,7 @@ import com.internship.tvseries.data.repository.details.TvDetailsRepository;
 import com.internship.tvseries.data.repository.details.TvDetailsRetrofitRepository;
 import com.internship.tvseries.data.repository.favorites.FavoritesRepository;
 import com.internship.tvseries.data.repository.favorites.FavoritesRoomRepository;
-import com.internship.tvseries.login_screen.register.RegisterViewModelFactory;
+import com.internship.tvseries.login.register.RegisterViewModelFactory;
 import com.internship.tvseries.ui.Popular.PopularViewModelFactory;
 import com.internship.tvseries.ui.TopRated.TopRatedViewModelFactory;
 import com.internship.tvseries.ui.details.DetailsViewModelFactory;

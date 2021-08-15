@@ -11,7 +11,7 @@
         android:layout_height="668dp"
         android:layout_marginTop="10dp"
         android:background="@color/cardview_light_background"
-
+        
         ></androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

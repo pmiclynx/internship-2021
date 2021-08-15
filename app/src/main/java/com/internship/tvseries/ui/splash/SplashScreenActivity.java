@@ -7,7 +7,7 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.internship.tvseries.R;
-import com.internship.tvseries.login_screen.login.LoginActivity;
+import com.internship.tvseries.login.login.LoginActivity;
 import com.internship.tvseries.utils.Constants;
 
 

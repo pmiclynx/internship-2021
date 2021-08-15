@@ -1,4 +1,4 @@
-package com.internship.tvseries.login_screen.login;
+package com.internship.tvseries.login.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +14,8 @@ import androidx.lifecycle.Observer;
 import com.internship.tvseries.MainActivity;
 import com.internship.tvseries.R;
 import com.internship.tvseries.data.repository.FirebaseLoginRepository;
-import com.internship.tvseries.login_screen.login.viewmodel.LoginViewModel;
-import com.internship.tvseries.login_screen.register.RegisterActivity;
+import com.internship.tvseries.login.login.viewmodel.LoginViewModel;
+import com.internship.tvseries.login.register.RegisterActivity;
 import com.internship.tvseries.ui.base.BaseActivity;
 
 public class LoginActivity extends BaseActivity<LoginViewModel> {

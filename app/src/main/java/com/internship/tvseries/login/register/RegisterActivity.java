@@ -1,4 +1,4 @@
-package com.internship.tvseries.login_screen.register;
+package com.internship.tvseries.login.register;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.internship.tvseries.MainActivity;
 import com.internship.tvseries.databinding.ActivityRegisterBinding;
-import com.internship.tvseries.login_screen.login.LoginActivity;
+import com.internship.tvseries.login.login.LoginActivity;
 import com.internship.tvseries.ui.base.BaseActivity;
 import com.internship.tvseries.utils.InjectorUtils;
 

@@ -6,5 +6,6 @@ import java.util.function.Consumer;
 
 //Interface for the authentication repository
 public interface RemoteRegisterRepository {
-    void register(String email, String password, Consumer<AuthState> consumer);
+
+    void register(String name, String email, String password, String password_confirmation, Consumer<AuthState> consumer);
 }

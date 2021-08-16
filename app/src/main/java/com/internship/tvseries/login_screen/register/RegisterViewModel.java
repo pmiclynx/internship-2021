@@ -19,12 +19,13 @@ public class RegisterViewModel extends BaseViewModel {
         this.lynxRegisterRepository = lynxRegisterRepository;
     }
 
-    public void register(String email, String password) {
-        lynxRegisterRepository.register(email, password, authState -> {
+    public void register(String name, String email, String password, String password_confirmation) {
+        lynxRegisterRepository.register(name,email, password, password_confirmation, authState -> {
             if (authState == null) {
-                remoteRegisterRepository.register(email, password, _registerSuccess::postValue);
-            } else
+                remoteRegisterRepository.register(name, email, password, password_confirmation, _registerSuccess::postValue);
+            } else {
                 _registerSuccess.postValue(authState);
+            }
         });
     }
 }

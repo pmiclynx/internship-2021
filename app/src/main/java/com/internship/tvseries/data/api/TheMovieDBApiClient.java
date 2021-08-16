@@ -12,7 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class ApiClient {
+public class TheMovieDBApiClient {
 
     private static final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC);
 
@@ -36,7 +36,7 @@ public class ApiClient {
 
     private static final Retrofit retrofit = new Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(Constants.THEMOVIEDB_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 

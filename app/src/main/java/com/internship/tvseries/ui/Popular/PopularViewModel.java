@@ -13,29 +13,29 @@ import java.util.function.Consumer;
 
 public class PopularViewModel extends BaseViewModel {
     private final TvRepository tvRepository;
-    private final TvRepository backendPopularRepository;
+    private final TvRepository lynxPopularRepository;
 
     private final MutableLiveData<List<Result>> _popularTvs = new MutableLiveData<>();
     public LiveData<List<Result>> popularTvs = _popularTvs;
 
-    public PopularViewModel(TvRepository tvRepository, TvRepository backendPopularRepository) {
+    public PopularViewModel(TvRepository tvRepository, TvRepository lynxPopularRepository) {
         this.tvRepository = tvRepository;
-        this.backendPopularRepository= backendPopularRepository;
+        this.lynxPopularRepository = lynxPopularRepository;
         getPopular();
     }
 
     private void getPopular() {
-        backendPopularRepository.getByCategory(Constants.CATEGORY_POPULAR, new Consumer<List<Result>>() {
+        lynxPopularRepository.getByCategory(Constants.CATEGORY_POPULAR, new Consumer<List<Result>>() {
             @Override
             public void accept(List<Result> results) {
-                if(results.isEmpty()){
+                if (results.isEmpty()) {
                     tvRepository.getByCategory(Constants.CATEGORY_POPULAR, new Consumer<List<Result>>() {
                         @Override
                         public void accept(List<Result> results) {
                             _popularTvs.postValue(results);
                         }
                     });
-                }else {
+                } else {
                     _popularTvs.postValue(results);
                 }
             }

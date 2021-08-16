@@ -52,7 +52,7 @@ public class InjectorUtils {
     }
 
     public PopularViewModelFactory providePopularViewModelFactory() {
-        return new PopularViewModelFactory(TvRetrofitRepository.getInstance(TheMovieDBApiClient.getMovieApi()), new LynxPopularRepository());
+        return new PopularViewModelFactory(TvRetrofitRepository.getInstance(TheMovieDBApiClient.getMovieApi()), LynxPopularRepository.getInstance(LynxApiClient.getMovieApi()));
     }
 
     public FavoritesViewModelFactory provideFavoritesViewModelFactory(Context context) {

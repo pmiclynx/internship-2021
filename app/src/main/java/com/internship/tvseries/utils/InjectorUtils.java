@@ -4,7 +4,8 @@ import android.content.Context;
 
 import com.internship.tvseries.data.api.ApiClient;
 import com.internship.tvseries.data.repository.TvRetrofitRepository;
-import com.internship.tvseries.data.repository.auth.FirebaseAuthRepository;
+import com.internship.tvseries.data.repository.auth.FirebaseRegisterRepository;
+import com.internship.tvseries.data.repository.auth.LynxRegisterRepository;
 import com.internship.tvseries.data.repository.backend.LynxPopularRepository;
 import com.internship.tvseries.data.repository.backend.LynxTopRatedRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
@@ -38,7 +39,7 @@ public class InjectorUtils {
     }
 
     public RegisterViewModelFactory provideRegisterViewModelFactory() {
-        return new RegisterViewModelFactory(FirebaseAuthRepository.getInstance());
+        return new RegisterViewModelFactory(FirebaseRegisterRepository.getInstance(), LynxRegisterRepository.getInstance());
     }
 
     public TopRatedViewModelFactory provideTopRatedViewModelFactory() {

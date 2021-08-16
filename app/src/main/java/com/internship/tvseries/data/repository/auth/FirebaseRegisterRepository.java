@@ -6,18 +6,20 @@ import com.internship.tvseries.data.model.AuthState;
 import java.util.function.Consumer;
 
 //Authentication repository using Firebase
-public class FirebaseAuthRepository implements AuthRepository {
+public class FirebaseRegisterRepository implements RemoteRegisterRepository {
 
-    private static FirebaseAuthRepository instance = null;
+    private static FirebaseRegisterRepository instance = null;
     private final FirebaseAuth firebaseAuth;
 
-    private FirebaseAuthRepository() {
+    private FirebaseRegisterRepository() {
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
-    public static FirebaseAuthRepository getInstance() {
-        if (instance == null)
-            instance = new FirebaseAuthRepository();
+    public static FirebaseRegisterRepository getInstance() {
+        synchronized (FirebaseRegisterRepository.class) {
+            if (instance == null)
+                instance = new FirebaseRegisterRepository();
+        }
         return instance;
     }
 

@@ -7,7 +7,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.common.api.Api;
 import com.internship.tvseries.MainActivity;
+import com.internship.tvseries.data.api.LynxApiClient;
 import com.internship.tvseries.databinding.ActivityRegisterBinding;
 import com.internship.tvseries.login_screen.login.LoginActivity;
 import com.internship.tvseries.ui.base.BaseActivity;
@@ -70,7 +72,7 @@ public class RegisterActivity extends BaseActivity<RegisterViewModel> {
                 return;
             }
             //register the user
-            viewModel.register(Email, Password);
+            viewModel.register(Name, Email, Password, ConfPassword);
         });
 
         binding.ScndLoginBtn.setOnClickListener(v -> {

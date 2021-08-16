@@ -44,11 +44,11 @@ public class InjectorUtils {
     }
 
     public RegisterViewModelFactory provideRegisterViewModelFactory() {
-        return new RegisterViewModelFactory(FirebaseRegisterRepository.getInstance(), LynxRegisterRepository.getInstance());
+        return new RegisterViewModelFactory(FirebaseRegisterRepository.getInstance(), LynxRegisterRepository.getInstance(LynxApiClient.getRegisterApi()));
     }
 
     public TopRatedViewModelFactory provideTopRatedViewModelFactory() {
-        return new TopRatedViewModelFactory(TvRetrofitRepository.getInstance(TheMovieDBApiClient.getMovieApi()), new LynxTopRatedRepository());
+        return new TopRatedViewModelFactory(TvRetrofitRepository.getInstance(TheMovieDBApiClient.getMovieApi()), LynxTopRatedRepository.getInstance(LynxApiClient.getMovieApi()));
     }
 
     public PopularViewModelFactory providePopularViewModelFactory() {

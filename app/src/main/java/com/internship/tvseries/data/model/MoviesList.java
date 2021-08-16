@@ -10,8 +10,12 @@ import java.util.List;
 
 public class MoviesList implements Serializable {
 
+
+
     @SerializedName("results")
     public List<Result> results = null;
+
+
 
     private final static long serialVersionUID = 7334358210326409107L;
 
@@ -23,6 +27,9 @@ public class MoviesList implements Serializable {
         this.results = results;
     }
 
+
+
+
     public List<Result> getResults() {
         return results;
     }
@@ -30,4 +37,13 @@ public class MoviesList implements Serializable {
     public void setResults(List<Result> results) {
         this.results = results;
     }
+
+    public MoviesList withResults(List<Result> results) {
+        this.results = results;
+        return this;
+    }
+
+
+
+
 }

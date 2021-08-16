@@ -41,4 +41,8 @@ public class LynxApiClient {
         return loginApi;
     }
 
+    private static final RegisterApi registerApi = retrofit.create(RegisterApi.class);
+
+    public static RegisterApi getRegisterApi() { return registerApi;}
+
 }

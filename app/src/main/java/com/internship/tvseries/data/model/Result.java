@@ -17,9 +17,6 @@ public class Result implements Serializable {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("original_language")
-    @Expose
-    private String originalLanguage;
     @SerializedName("original_name")
     @Expose
     private String originalName;
@@ -47,27 +44,11 @@ public class Result implements Serializable {
     public Result() {
     }
 
-    /**
-     *
-     * @param overview
-     * @param voteAverage
-     * @param originalLanguage
-     * @param originalName
-     * @param firstAirDate
-     * @param popularity
-     * @param name
-     * @param originCountry
-     * @param backdropPath
-     * @param id
-     * @param voteCount
-     * @param posterPath
-     */
-    public Result(String backdropPath, Integer id, String name, String originalLanguage, String originalName, String overview, Double popularity, Object posterPath, Double voteAverage, Integer voteCount, String firstAirDate) {
+    public Result(String backdropPath, Integer id, String name, String originalName, String overview, Double popularity, Object posterPath, Double voteAverage, Integer voteCount, String firstAirDate) {
         super();
         this.backdropPath = backdropPath;
         this.id = id;
         this.name = name;
-        this.originalLanguage = originalLanguage;
         this.originalName = originalName;
         this.overview = overview;
         this.popularity = popularity;
@@ -89,6 +70,10 @@ public class Result implements Serializable {
         this.backdropPath = backdropPath;
         return this;
     }
+
+
+
+
 
     public Integer getId() {
         return id;
@@ -116,18 +101,9 @@ public class Result implements Serializable {
         return this;
     }
 
-    public String getOriginalLanguage() {
-        return originalLanguage;
-    }
 
-    public void setOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
-    }
 
-    public Result withOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
-        return this;
-    }
+
 
     public String getOriginalName() {
         return originalName;
@@ -226,7 +202,6 @@ public class Result implements Serializable {
                 "backdropPath='" + backdropPath + '\'' +
                 ", id=" + id +
                 ", name='" + name + '\'' +
-                ", originalLanguage='" + originalLanguage + '\'' +
                 ", originalName='" + originalName + '\'' +
                 ", overview='" + overview + '\'' +
                 ", popularity=" + popularity +

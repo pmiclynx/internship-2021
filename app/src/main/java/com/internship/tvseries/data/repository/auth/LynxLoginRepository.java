@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 
 public class LynxLoginRepository implements RemoteLoginRepository {
 
-    private LynxLoginRepository(){}
+    public LynxLoginRepository(){}
 
     @Override
     public void login(String email, String password, Consumer<AuthState> consumer) {

@@ -9,7 +9,7 @@ import com.internship.tvseries.data.repository.TvRetrofitRepository;
 import com.internship.tvseries.data.repository.auth.FirebaseRegisterRepository;
 import com.internship.tvseries.data.repository.auth.LynxLoginRepository;
 import com.internship.tvseries.data.repository.auth.LynxRegisterRepository;
-import com.internship.tvseries.data.repository.backend.BackendDetailsRepository;
+import com.internship.tvseries.data.repository.backend.LynxDetailsRepository;
 import com.internship.tvseries.data.repository.backend.LynxPopularRepository;
 import com.internship.tvseries.data.repository.backend.LynxTopRatedRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
@@ -40,7 +40,7 @@ public class InjectorUtils {
     public DetailsViewModelFactory provideDetailsViewModelFactory(int id, Context context) {
         TvDetailsRepository tvDetailsRepository = TvDetailsRetrofitRepository.getInstance(TheMovieDBApiClient.getTvDetailsApi());
         FavoritesRepository favoritesRoomRepository = FavoritesRoomRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao());
-        return new DetailsViewModelFactory(tvDetailsRepository, favoritesRoomRepository, id, new BackendDetailsRepository()); //needs fixes
+        return new DetailsViewModelFactory(tvDetailsRepository, favoritesRoomRepository, id, LynxDetailsRepository.getInstance(LynxApiClient.getTvDetailsApi()));
     }
 
     public RegisterViewModelFactory provideRegisterViewModelFactory() {

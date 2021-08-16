@@ -35,12 +35,6 @@ public class LynxApiClient {
         return movieApi;
     }
 
-//    private static final ConfigApi configApi = retrofit.create(ConfigApi.class);
-//
-//    public static ConfigApi getConfigApi() {
-//        return configApi;
-//    }
-
     private static final LoginApi loginApi = retrofit.create(LoginApi.class);
     public static LoginApi getLoginApi() {
         return loginApi;

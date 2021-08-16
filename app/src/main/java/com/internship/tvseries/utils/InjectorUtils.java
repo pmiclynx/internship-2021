@@ -2,14 +2,11 @@ package com.internship.tvseries.utils;
 
 import android.content.Context;
 
-import com.internship.tvseries.data.api.ApiClient;
+import com.internship.tvseries.data.api.TheMovieDBApiClient;
 import com.internship.tvseries.data.repository.TvRetrofitRepository;
-import com.internship.tvseries.data.repository.auth.FirebaseAuthRepository;
-import com.internship.tvseries.data.repository.backend.BackendDetailsRepository;
-import com.internship.tvseries.data.repository.backend.BackendPopularRepository;
-import com.internship.tvseries.data.repository.backend.BackendTopRatedRepository;
 import com.internship.tvseries.data.repository.auth.FirebaseRegisterRepository;
 import com.internship.tvseries.data.repository.auth.LynxRegisterRepository;
+import com.internship.tvseries.data.repository.backend.BackendDetailsRepository;
 import com.internship.tvseries.data.repository.backend.LynxPopularRepository;
 import com.internship.tvseries.data.repository.backend.LynxTopRatedRepository;
 import com.internship.tvseries.data.repository.db.FavoritesDatabase;
@@ -37,7 +34,7 @@ public class InjectorUtils {
     }
 
     public DetailsViewModelFactory provideDetailsViewModelFactory(int id, Context context) {
-        TvDetailsRepository tvDetailsRepository = TvDetailsRetrofitRepository.getInstance(ApiClient.getTvDetailsApi());
+        TvDetailsRepository tvDetailsRepository = TvDetailsRetrofitRepository.getInstance(TheMovieDBApiClient.getTvDetailsApi());
         FavoritesRepository favoritesRoomRepository = FavoritesRoomRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao());
         return new DetailsViewModelFactory(tvDetailsRepository, favoritesRoomRepository, id, new BackendDetailsRepository()); //needs fixes
     }
@@ -47,11 +44,11 @@ public class InjectorUtils {
     }
 
     public TopRatedViewModelFactory provideTopRatedViewModelFactory() {
-        return new TopRatedViewModelFactory(TvRetrofitRepository.getInstance(ApiClient.getMovieApi()), new LynxTopRatedRepository());
+        return new TopRatedViewModelFactory(TvRetrofitRepository.getInstance(TheMovieDBApiClient.getMovieApi()), new LynxTopRatedRepository());
     }
 
     public PopularViewModelFactory providePopularViewModelFactory() {
-        return new PopularViewModelFactory(TvRetrofitRepository.getInstance(ApiClient.getMovieApi()), new LynxPopularRepository());
+        return new PopularViewModelFactory(TvRetrofitRepository.getInstance(TheMovieDBApiClient.getMovieApi()), new LynxPopularRepository());
     }
 
     public FavoritesViewModelFactory provideFavoritesViewModelFactory(Context context) {

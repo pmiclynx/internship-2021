@@ -4,39 +4,22 @@ import com.internship.tvseries.utils.Constants;
 
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
-public class ApiClient {
-
+public class LynxApiClient {
     private static final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC);
 
     private static final OkHttpClient okHttpClient = new OkHttpClient.Builder()
-            .addInterceptor(chain -> {
-                HttpUrl url = chain.request()
-                        .url()
-                        .newBuilder()
-                        .addQueryParameter("api_key", Constants.API_KEY)
-                        .build();
-
-                Request request = chain.request()
-                        .newBuilder()
-                        .url(url)
-                        .build();
-                return chain.proceed(request);
-            })
             .addInterceptor(loggingInterceptor)
             .connectTimeout(60, TimeUnit.SECONDS)
             .build();
 
     private static final Retrofit retrofit = new Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(Constants.LYNX_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
@@ -46,10 +29,10 @@ public class ApiClient {
         return tvDetailsApi;
     }
 
-    private static final MovieApi movieApi=retrofit.create(MovieApi.class);
-    public static MovieApi getMovieApi(){return movieApi;}
+    private static final MovieApi movieApi = retrofit.create(MovieApi.class);
 
-    private static final ConfigApi configApi = retrofit.create(ConfigApi.class);
-    public static ConfigApi getConfigApi(){return configApi;}
+    public static MovieApi getMovieApi() {
+        return movieApi;
+    }
 
 }

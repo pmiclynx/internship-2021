@@ -11,21 +11,12 @@ public class Result implements Serializable {
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
-    @SerializedName("genre_ids")
-    @Expose
-    private List<Integer> genreIds = null;
     @SerializedName("id")
     @Expose
     private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("origin_country")
-    @Expose
-    private List<String> originCountry = null;
-    @SerializedName("original_language")
-    @Expose
-    private String originalLanguage;
     @SerializedName("original_name")
     @Expose
     private String originalName;
@@ -53,30 +44,11 @@ public class Result implements Serializable {
     public Result() {
     }
 
-    /**
-     *
-     * @param overview
-     * @param voteAverage
-     * @param genreIds
-     * @param originalLanguage
-     * @param originalName
-     * @param firstAirDate
-     * @param popularity
-     * @param name
-     * @param originCountry
-     * @param backdropPath
-     * @param id
-     * @param voteCount
-     * @param posterPath
-     */
-    public Result(String backdropPath, List<Integer> genreIds, Integer id, String name, List<String> originCountry, String originalLanguage, String originalName, String overview, Double popularity, Object posterPath, Double voteAverage, Integer voteCount, String firstAirDate) {
+    public Result(String backdropPath, Integer id, String name, String originalName, String overview, Double popularity, Object posterPath, Double voteAverage, Integer voteCount, String firstAirDate) {
         super();
         this.backdropPath = backdropPath;
-        this.genreIds = genreIds;
         this.id = id;
         this.name = name;
-        this.originCountry = originCountry;
-        this.originalLanguage = originalLanguage;
         this.originalName = originalName;
         this.overview = overview;
         this.popularity = popularity;
@@ -99,18 +71,9 @@ public class Result implements Serializable {
         return this;
     }
 
-    public List<Integer> getGenreIds() {
-        return genreIds;
-    }
 
-    public void setGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
-    }
 
-    public Result withGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
-        return this;
-    }
+
 
     public Integer getId() {
         return id;
@@ -138,31 +101,9 @@ public class Result implements Serializable {
         return this;
     }
 
-    public List<String> getOriginCountry() {
-        return originCountry;
-    }
 
-    public void setOriginCountry(List<String> originCountry) {
-        this.originCountry = originCountry;
-    }
 
-    public Result withOriginCountry(List<String> originCountry) {
-        this.originCountry = originCountry;
-        return this;
-    }
 
-    public String getOriginalLanguage() {
-        return originalLanguage;
-    }
-
-    public void setOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
-    }
-
-    public Result withOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
-        return this;
-    }
 
     public String getOriginalName() {
         return originalName;
@@ -259,11 +200,8 @@ public class Result implements Serializable {
     public String toString() {
         return "Result{" +
                 "backdropPath='" + backdropPath + '\'' +
-                ", genreIds=" + genreIds +
                 ", id=" + id +
                 ", name='" + name + '\'' +
-                ", originCountry=" + originCountry +
-                ", originalLanguage='" + originalLanguage + '\'' +
                 ", originalName='" + originalName + '\'' +
                 ", overview='" + overview + '\'' +
                 ", popularity=" + popularity +

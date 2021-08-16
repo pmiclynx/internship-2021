@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer;
 import com.internship.tvseries.MainActivity;
 import com.internship.tvseries.R;
 import com.internship.tvseries.data.repository.FirebaseLoginRepository;
+import com.internship.tvseries.data.repository.auth.LynxLoginRepository;
 import com.internship.tvseries.login_screen.login.viewmodel.LoginViewModel;
 import com.internship.tvseries.login_screen.register.RegisterActivity;
 import com.internship.tvseries.ui.base.BaseActivity;
@@ -83,6 +84,6 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     @NonNull
     @Override
     public LoginViewModel createViewModel() {
-        return new LoginViewModelFactory(new FirebaseLoginRepository()).create(LoginViewModel.class);
+        return new LoginViewModelFactory(new FirebaseLoginRepository(), new LynxLoginRepository()).create(LoginViewModel.class);
     }
 }

@@ -17,4 +17,21 @@ public class LoginResponse implements Serializable {
 
     @SerializedName("user")
     private User user;
+
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public String getTokenType() {
+        return tokenType;
+    }
+
+    public int getExpiresIn() {
+        return expiresIn;
+    }
+
+    public User getUser() {
+        return user;
+    }
 }

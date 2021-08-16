@@ -84,8 +84,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     @NonNull
     @Override
     public LoginViewModel createViewModel() {
-//        return new LoginViewModelFactory(new FirebaseLoginRepository(), new LynxLoginRepository()).create(LoginViewModel.class);
-        LoginViewModelFactory factory = InjectorUtils.getInstance().provideLoginViewModelFactory();
+        LoginViewModelFactory factory = InjectorUtils.getInstance().provideLoginViewModelFactory(getApplicationContext());
         return new ViewModelProvider(this, factory).get(LoginViewModel.class);
     }
 }

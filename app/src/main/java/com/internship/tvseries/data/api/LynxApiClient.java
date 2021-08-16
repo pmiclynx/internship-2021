@@ -36,6 +36,7 @@ public class LynxApiClient {
     }
 
     private static final LoginApi loginApi = retrofit.create(LoginApi.class);
+
     public static LoginApi getLoginApi() {
         return loginApi;
     }

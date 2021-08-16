@@ -1,9 +1,13 @@
 package com.internship.tvseries.data.repository.auth;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.internship.tvseries.data.api.LoginApi;
 import com.internship.tvseries.data.model.AuthState;
 import com.internship.tvseries.data.model.Credentials;
 import com.internship.tvseries.data.model.LoginResponse;
+import com.internship.tvseries.data.model.User;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,14 +21,16 @@ public class LynxLoginRepository implements RemoteLoginRepository {
 
     private static LynxLoginRepository instance = null;
     private final LoginApi api;
+    private final Context context;
 
-    private LynxLoginRepository(LoginApi api) {
+    private LynxLoginRepository(LoginApi api, Context context) {
         this.api = api;
+        this.context = context;
     }
 
-    public static synchronized LynxLoginRepository getInstance(LoginApi api) {
+    public static synchronized LynxLoginRepository getInstance(LoginApi api, Context context) {
         if (instance == null) {
-            instance = new LynxLoginRepository(api);
+            instance = new LynxLoginRepository(api, context);
         }
         return instance;
     }
@@ -37,6 +43,12 @@ public class LynxLoginRepository implements RemoteLoginRepository {
             @Override
             public void onResponse(@NotNull Call<LoginResponse> call, @NotNull Response<LoginResponse> response) {
                 consumer.accept(new AuthState(true));
+
+                if (response.body() != null) {
+                    SharedPreferences.Editor editor = context.getSharedPreferences("CurrentUser", Context.MODE_PRIVATE).edit();
+                    editor.putString("current_user", response.body().getAccessToken());
+                    editor.apply();
+                }
             }
 
             @Override
@@ -48,6 +60,6 @@ public class LynxLoginRepository implements RemoteLoginRepository {
 
     @Override
     public boolean isLogged() {
-        return false;
+        return context.getSharedPreferences("CurrentUser", Context.MODE_PRIVATE).contains("current_user");
     }
 }

@@ -59,7 +59,7 @@ public class InjectorUtils {
         return new FavoritesViewModelFactory(FavoritesRoomRepository.getInstance(FavoritesDatabase.getInstance(context).favoritesDao()));
     }
 
-    public LoginViewModelFactory provideLoginViewModelFactory() {
-        return new LoginViewModelFactory(FirebaseLoginRepository.getInstance(), LynxLoginRepository.getInstance(LynxApiClient.getLoginApi()));
+    public LoginViewModelFactory provideLoginViewModelFactory(Context context) {
+        return new LoginViewModelFactory(FirebaseLoginRepository.getInstance(), LynxLoginRepository.getInstance(LynxApiClient.getLoginApi(), context));
     }
 }

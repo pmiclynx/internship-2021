@@ -1,4 +1,4 @@
-package com.internship.tvseries.data.repository;
+package com.internship.tvseries.data.repository.auth;
 
 import com.internship.tvseries.data.model.AuthState;
 

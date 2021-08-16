@@ -3,8 +3,7 @@ package com.internship.tvseries.login_screen.login;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.internship.tvseries.data.repository.FirebaseLoginRepository;
-import com.internship.tvseries.data.repository.RemoteLoginRepository;
+import com.internship.tvseries.data.repository.auth.RemoteLoginRepository;
 import com.internship.tvseries.login_screen.login.viewmodel.LoginViewModel;
 
 public class LoginViewModelFactory implements ViewModelProvider.Factory {

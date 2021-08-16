@@ -1,17 +1,49 @@
 package com.internship.tvseries.data.repository.auth;
 
+import com.internship.tvseries.data.api.LoginApi;
 import com.internship.tvseries.data.model.AuthState;
-import com.internship.tvseries.data.repository.RemoteLoginRepository;
+import com.internship.tvseries.data.model.Credentials;
+import com.internship.tvseries.data.model.LoginResponse;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LynxLoginRepository implements RemoteLoginRepository {
 
-    public LynxLoginRepository(){}
+    private static LynxLoginRepository instance = null;
+    private final LoginApi api;
+
+    private LynxLoginRepository(LoginApi api) {
+        this.api = api;
+    }
+
+    public static synchronized LynxLoginRepository getInstance(LoginApi api) {
+        if (instance == null) {
+            instance = new LynxLoginRepository(api);
+        }
+        return instance;
+    }
 
     @Override
     public void login(String email, String password, Consumer<AuthState> consumer) {
-        consumer.accept(null);
+        Credentials credentials = new Credentials(email, password);
+        Call<LoginResponse> call = api.login(credentials);
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<LoginResponse> call, @NotNull Response<LoginResponse> response) {
+                consumer.accept(new AuthState(true));
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<LoginResponse> call, @NotNull Throwable t) {
+                consumer.accept(new AuthState(t.getMessage()));
+            }
+        });
     }
 
     @Override

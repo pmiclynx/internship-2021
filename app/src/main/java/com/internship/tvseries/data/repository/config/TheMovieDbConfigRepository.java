@@ -1,5 +1,7 @@
 package com.internship.tvseries.data.repository.config;
 
+import android.util.Log;
+
 import com.internship.tvseries.data.api.ConfigApi;
 import com.internship.tvseries.data.model.Configuration;
 

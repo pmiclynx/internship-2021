@@ -1,6 +1,8 @@
 package com.internship.tvseries.login_screen.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +37,12 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
             @Override
             public void onChanged(Boolean successLogin) {
                 if (successLogin) {
+                    SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE).edit();
+                    editor.putBoolean("current_user", true);
+                    editor.apply();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                } else if (getApplicationContext().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE).contains("current_user")) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
@@ -50,6 +58,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
         });
 
         viewModel.checkIfUserIsLogged();
+
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +93,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     @NonNull
     @Override
     public LoginViewModel createViewModel() {
-        LoginViewModelFactory factory = InjectorUtils.getInstance().provideLoginViewModelFactory(getApplicationContext());
+        LoginViewModelFactory factory = InjectorUtils.getInstance().provideLoginViewModelFactory();
         return new ViewModelProvider(this, factory).get(LoginViewModel.class);
     }
 }

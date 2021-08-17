@@ -1,4 +1,4 @@
-package com.internship.tvseries.data.repository;
+package com.internship.tvseries.data.repository.auth;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.internship.tvseries.data.model.AuthState;
@@ -6,10 +6,18 @@ import com.internship.tvseries.data.model.AuthState;
 import java.util.function.Consumer;
 
 public class FirebaseLoginRepository implements RemoteLoginRepository {
+    private static FirebaseLoginRepository instance = null;
     private FirebaseAuth auth;
 
-    public FirebaseLoginRepository() {
+    private FirebaseLoginRepository() {
         auth = FirebaseAuth.getInstance();
+    }
+
+    public static synchronized FirebaseLoginRepository getInstance() {
+        if (instance == null)
+            instance = new FirebaseLoginRepository();
+
+        return instance;
     }
 
     @Override

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.internship.tvseries.data.model.AuthState;
-import com.internship.tvseries.data.repository.RemoteLoginRepository;
+import com.internship.tvseries.data.repository.auth.RemoteLoginRepository;
 import com.internship.tvseries.ui.base.BaseViewModel;
 
 import java.util.function.Consumer;
@@ -23,12 +23,12 @@ public class LoginViewModel extends BaseViewModel {
 
     public LoginViewModel(@NonNull RemoteLoginRepository remoteLoginRepository, RemoteLoginRepository lynxLoginRepository) {
         this.remoteLoginRepository = remoteLoginRepository;
-        this.lynxLoginRepository=lynxLoginRepository;
+        this.lynxLoginRepository = lynxLoginRepository;
     }
 
     public void login(String email, String password) {
-        lynxLoginRepository.login(email,password,authState -> {
-            if(authState==null){
+        lynxLoginRepository.login(email, password, authState -> {
+            if (authState == null) {
                 remoteLoginRepository.login(email, password, new Consumer<AuthState>() {
                     @Override
                     public void accept(AuthState authState) {
@@ -39,8 +39,11 @@ public class LoginViewModel extends BaseViewModel {
                         }
                     }
                 });
-            }else{
-                _successLogin.postValue(true);
+            } else {
+                if (authState.isSuccessful())
+                    _successLogin.postValue(true);
+                else
+                    _errorLogin.postValue(authState.getErrorMessage());
             }
         });
     }
@@ -48,7 +51,7 @@ public class LoginViewModel extends BaseViewModel {
     public void checkIfUserIsLogged() {
         if (lynxLoginRepository.isLogged()) {
             _successLogin.postValue(true);
-        }else if(remoteLoginRepository.isLogged()){
+        } else if (remoteLoginRepository.isLogged()) {
             _successLogin.postValue(true);
         }
     }

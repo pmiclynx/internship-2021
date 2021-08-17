@@ -10,14 +10,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.internship.tvseries.MainActivity;
 import com.internship.tvseries.R;
-import com.internship.tvseries.data.repository.FirebaseLoginRepository;
-import com.internship.tvseries.data.repository.auth.LynxLoginRepository;
 import com.internship.tvseries.login_screen.login.viewmodel.LoginViewModel;
 import com.internship.tvseries.login_screen.register.RegisterActivity;
 import com.internship.tvseries.ui.base.BaseActivity;
+import com.internship.tvseries.utils.InjectorUtils;
 
 public class LoginActivity extends BaseActivity<LoginViewModel> {
 
@@ -84,6 +84,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     @NonNull
     @Override
     public LoginViewModel createViewModel() {
-        return new LoginViewModelFactory(new FirebaseLoginRepository(), new LynxLoginRepository()).create(LoginViewModel.class);
+        LoginViewModelFactory factory = InjectorUtils.getInstance().provideLoginViewModelFactory(getApplicationContext());
+        return new ViewModelProvider(this, factory).get(LoginViewModel.class);
     }
 }

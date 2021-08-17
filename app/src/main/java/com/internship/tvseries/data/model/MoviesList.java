@@ -24,7 +24,6 @@ public class MoviesList implements Serializable {
     }
 
     public MoviesList(List<Result> results) {
-        super();
         this.results = results;
     }
 

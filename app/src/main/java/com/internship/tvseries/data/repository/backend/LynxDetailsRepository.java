@@ -45,12 +45,13 @@ public class LynxDetailsRepository implements TvDetailsRepository {
                     if (tv != null)
                         consumer.accept(tv);
                 } else
-                    Log.e("DetailsRepository", response.message());
+                    consumer.accept(null);
+
             }
 
             @Override
             public void onFailure(@NotNull Call<TvDetailsResponse> call, @NotNull Throwable t) {
-                Log.e("DetailsRepository", t.getMessage());
+                consumer.accept(null);
             }
         });
     }

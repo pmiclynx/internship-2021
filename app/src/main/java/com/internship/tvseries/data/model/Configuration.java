@@ -16,6 +16,10 @@ public class Configuration{
 		return images;
 	}
 
+	public void setImages(Images images) {
+		this.images = images;
+	}
+
 	public List<String> getChangeKeys(){
 		return changeKeys;
 	}

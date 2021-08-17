@@ -26,6 +26,7 @@ import java.util.List;
 public class PopularFragment extends BaseFragment<PopularViewModel> {
 
     private FragmentPopularBinding binding;
+    private GenAdapter adapter;
 
     @NotNull
     @NonNull
@@ -44,19 +45,20 @@ public class PopularFragment extends BaseFragment<PopularViewModel> {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstance) {
         super.onViewCreated(view, savedInstance);
         viewModel.popularTvs.observe(getViewLifecycleOwner(), this::bindUI);
+        viewModel.newPopularTvs.observe(getViewLifecycleOwner(), this::nextPage);
     }
 
     private void bindUI(List<Result> movieResult) {
         binding.recyclerVpopular.setLayoutManager(new LinearLayoutManager(getContext()));
-        GenAdapter adapter = new GenAdapter(getContext(), movieResult, id -> {
+        adapter = new GenAdapter(getContext(), movieResult, id -> {
             Intent intent = new Intent(getContext(), DetailsActivity.class);
             intent.putExtra("id", id);
             startActivity(intent);
-        });
+        }, page -> viewModel.nextPage(page));
         binding.recyclerVpopular.setAdapter(adapter);
     }
 
-
-
-
+    private void nextPage(List<Result> newResults) {
+        adapter.appendList(newResults);
+    }
 }

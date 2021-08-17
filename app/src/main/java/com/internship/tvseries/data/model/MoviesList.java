@@ -10,25 +10,17 @@ import java.util.List;
 
 public class MoviesList implements Serializable {
 
-
+    @SerializedName("page")
+    public int page;
 
     @SerializedName("results")
     public List<Result> results = null;
 
-
-
     private final static long serialVersionUID = 7334358210326409107L;
-
-
-    public MoviesList() {
-    }
 
     public MoviesList(List<Result> results) {
         this.results = results;
     }
-
-
-
 
     public List<Result> getResults() {
         return results;

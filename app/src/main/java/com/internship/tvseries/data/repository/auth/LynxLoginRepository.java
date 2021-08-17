@@ -21,16 +21,14 @@ public class LynxLoginRepository implements RemoteLoginRepository {
 
     private static LynxLoginRepository instance = null;
     private final LoginApi api;
-    private final Context context;
 
-    private LynxLoginRepository(LoginApi api, Context context) {
+    private LynxLoginRepository(LoginApi api) {
         this.api = api;
-        this.context = context;
     }
 
-    public static synchronized LynxLoginRepository getInstance(LoginApi api, Context context) {
+    public static synchronized LynxLoginRepository getInstance(LoginApi api) {
         if (instance == null) {
-            instance = new LynxLoginRepository(api, context);
+            instance = new LynxLoginRepository(api);
         }
         return instance;
     }
@@ -42,12 +40,9 @@ public class LynxLoginRepository implements RemoteLoginRepository {
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(@NotNull Call<LoginResponse> call, @NotNull Response<LoginResponse> response) {
-                consumer.accept(new AuthState(true));
-
                 if (response.body() != null) {
-                    SharedPreferences.Editor editor = context.getSharedPreferences("CurrentUser", Context.MODE_PRIVATE).edit();
-                    editor.putString("current_user", response.body().getAccessToken());
-                    editor.apply();
+                    consumer.accept(new AuthState(true));
+
                 }
             }
 
@@ -60,6 +55,6 @@ public class LynxLoginRepository implements RemoteLoginRepository {
 
     @Override
     public boolean isLogged() {
-        return context.getSharedPreferences("CurrentUser", Context.MODE_PRIVATE).contains("current_user");
+        return false;
     }
 }

@@ -53,6 +53,6 @@ public class LoginViewModel extends BaseViewModel {
             _successLogin.postValue(true);
         } else if (remoteLoginRepository.isLogged()) {
             _successLogin.postValue(true);
-        }
+        } else _successLogin.postValue(false);
     }
 }

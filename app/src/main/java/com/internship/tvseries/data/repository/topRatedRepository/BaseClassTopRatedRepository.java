@@ -1,8 +1,5 @@
-package com.internship.tvseries.data.repository.backend;
+package com.internship.tvseries.data.repository.topRatedRepository;
 
-import android.util.Log;
-
-import com.internship.tvseries.data.api.LynxApiClient;
 import com.internship.tvseries.data.api.MovieApi;
 import com.internship.tvseries.data.model.MoviesList;
 import com.internship.tvseries.data.model.Result;
@@ -18,18 +15,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LynxTopRatedRepository implements TvRepository {
+public class BaseClassTopRatedRepository implements TvRepository {
 
-    private static LynxTopRatedRepository instance = null;
+    private static BaseClassTopRatedRepository instance = null;
     private MovieApi api;
 
-    public LynxTopRatedRepository(MovieApi api) {
+    public BaseClassTopRatedRepository(MovieApi api) {
         this.api = api;
     }
 
-    public static LynxTopRatedRepository getInstance(MovieApi api) {
+    public static BaseClassTopRatedRepository getInstance(MovieApi api) {
         if (instance == null)
-            instance = new LynxTopRatedRepository(api);
+            instance = new BaseClassTopRatedRepository(api);
         return instance;
     }
 

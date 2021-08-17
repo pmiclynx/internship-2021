@@ -1,12 +1,9 @@
-package com.internship.tvseries.data.repository.backend;
-
-import android.util.Log;
+package com.internship.tvseries.data.repository.popularRepository;
 
 import com.internship.tvseries.data.api.MovieApi;
 import com.internship.tvseries.data.model.MoviesList;
 import com.internship.tvseries.data.model.Result;
 import com.internship.tvseries.data.repository.TvRepository;
-import com.internship.tvseries.data.repository.TvRetrofitRepository;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -18,18 +15,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LynxPopularRepository implements TvRepository {
+public class BaseClassPopularRepository implements TvRepository {
 
-    private static LynxPopularRepository instance = null;
+    private static BaseClassPopularRepository instance = null;
     private final MovieApi api;
 
-    private LynxPopularRepository(MovieApi api) {
+    public BaseClassPopularRepository(MovieApi api) {
         this.api = api;
     }
 
-    public static LynxPopularRepository getInstance(MovieApi api) {
+    public static BaseClassPopularRepository getInstance(MovieApi api) {
         if (instance == null)
-            instance = new LynxPopularRepository(api);
+            instance = new BaseClassPopularRepository(api);
         return instance;
     }
     @Override

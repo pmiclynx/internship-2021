@@ -43,6 +43,10 @@ public class Images{
 		return baseUrl;
 	}
 
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
+
 	public List<String> getLogoSizes(){
 		return logoSizes;
 	}

@@ -18,7 +18,7 @@ public final class Constants {
                 TheMovieDbConfigRepository.getInstance(TheMovieDBApiClient.getConfigApi()).getConfig(configuration1 ->
                         IMAGE_BASE_URL = configuration1.getImages().getSecureBaseUrl() + configuration1.getImages().getPosterSizes().get(5));
             } else
-                IMAGE_BASE_URL = configuration.getImages().getSecureBaseUrl() + configuration.getImages().getPosterSizes().get(5);
+                IMAGE_BASE_URL = configuration.getImages().getBaseUrl();
         });
     }
 }

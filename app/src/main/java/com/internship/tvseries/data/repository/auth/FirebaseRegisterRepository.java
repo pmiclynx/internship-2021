@@ -24,7 +24,7 @@ public class FirebaseRegisterRepository implements RemoteRegisterRepository {
     }
 
     @Override
-    public void register(String name, String email, String password,String password_confirmation, Consumer<AuthState> consumer) {
+    public void register(String name, String email, String password, String password_confirmation, Consumer<AuthState> consumer) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> consumer.accept(new AuthState(true)))
                 .addOnFailureListener(e -> consumer.accept(new AuthState(e.getMessage())));

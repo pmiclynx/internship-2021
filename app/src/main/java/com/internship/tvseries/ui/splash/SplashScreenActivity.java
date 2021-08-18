@@ -12,6 +12,7 @@ import com.internship.tvseries.utils.Constants;
 
 
 public class SplashScreenActivity extends AppCompatActivity {
+    private boolean exit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +22,16 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            if (!exit)
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finish();
         }, 2000);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        exit = true;
     }
 }

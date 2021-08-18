@@ -1,6 +1,7 @@
 package com.internship.tvseries.ui.details;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -58,7 +59,13 @@ public class DetailsActivity extends BaseActivity<DetailsViewModel> {
         binding.tvOverview.setText(tv.getOverview());
         binding.tvSeasons.setText(String.valueOf(tv.getNumberOfSeasons()));
         binding.tvEpisodes.setText(String.valueOf(tv.getNumberOfEpisodes()));
+        if (tv.getNumberOfSeasons() == 0)
+            binding.seasonsLayout.setVisibility(View.INVISIBLE);
+        if(tv.getNumberOfEpisodes() == 0)
+            binding.episodesLayout.setVisibility(View.INVISIBLE);
         binding.tvStatus.setText(tv.getStatus());
+        if (tv.getStatus() == null)
+            binding.tvStatus.setVisibility(View.INVISIBLE);
         binding.tvTagline.setText(tv.getTagline());
 
         viewModel.checkIfAlreadyAdded(tv.getId());

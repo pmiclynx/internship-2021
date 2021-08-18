@@ -30,8 +30,8 @@ public class TvRetrofitRepository implements TvRepository {
     }
 
     @Override
-    public void getByCategory(String category, Consumer<List<Result>> consumer) {
-        Call<MoviesList> call = api.listOfMovies(category);
+    public void getByCategory(String category, int page, Consumer<List<Result>> consumer) {
+        Call<MoviesList> call = api.listOfMovies(category, page);
         call.enqueue(new Callback<MoviesList>() {
             @Override
             public void onResponse(@NotNull Call<MoviesList> call, @NotNull Response<MoviesList> response) {

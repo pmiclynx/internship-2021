@@ -1,6 +1,7 @@
 package com.internship.tvseries;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import com.bumptech.glide.Glide;
 import com.internship.tvseries.data.model.Result;
 import com.internship.tvseries.utils.Constants;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,16 +24,24 @@ import java.util.List;
 public class GenAdapter extends RecyclerView.Adapter<GenAdapter.ViewHolder> {
     private final List<Result> movieResult;
     private final ItemClickListener listener;
-    private Context context;
+    private final EndOfListListener endOfListListener;
+    private final Context context;
+    private int page = 1;
+    private boolean endReached = false;
 
     public interface ItemClickListener {
         void onItemClicked(int id);
     }
 
-    public GenAdapter(Context context, List<Result> movieResult, ItemClickListener listener) {
+    public interface EndOfListListener {
+        void onEndReached(int page);
+    }
+
+    public GenAdapter(Context context, List<Result> movieResult, ItemClickListener listener, EndOfListListener endOfListListener) {
         this.context = context;
         this.movieResult = new ArrayList<>(movieResult);
         this.listener = listener;
+        this.endOfListListener = endOfListListener;
     }
 
 
@@ -49,12 +60,25 @@ public class GenAdapter extends RecyclerView.Adapter<GenAdapter.ViewHolder> {
         Result item = movieResult.get(position);
         holder.Bind(item);
 
+        if (position == getItemCount() - 1) {
+            if (!endReached)
+                endOfListListener.onEndReached(++page);
+        }
         holder.view.setOnClickListener(v -> listener.onItemClicked(item.getId()));
     }
 
     @Override
     public int getItemCount() {
         return movieResult.size();
+    }
+
+    public void appendList(List<Result> nextPageList) {
+        if (nextPageList.isEmpty())
+            endReached = true;
+        else {
+            movieResult.addAll(nextPageList);
+            notifyDataSetChanged();
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

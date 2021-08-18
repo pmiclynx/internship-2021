@@ -27,14 +27,14 @@ public class LynxPopularRepository implements TvRepository {
         this.api = api;
     }
 
-    public static LynxPopularRepository getInstance(MovieApi api) {
+    public static synchronized LynxPopularRepository getInstance(MovieApi api) {
         if (instance == null)
             instance = new LynxPopularRepository(api);
         return instance;
     }
     @Override
-    public void getByCategory(String category, Consumer<List<Result>> consumer) {
-        Call<MoviesList> call = api.listOfMovies(category);
+    public void getByCategory(String category, int page, Consumer<List<Result>> consumer) {
+        Call<MoviesList> call = api.listOfMovies(category, page);
         call.enqueue(new Callback<MoviesList>() {
             @Override
             public void onResponse(@NotNull Call<MoviesList> call, @NotNull Response<MoviesList> response) {
@@ -48,7 +48,7 @@ public class LynxPopularRepository implements TvRepository {
 
             @Override
             public void onFailure(@NotNull Call<MoviesList> call, @NotNull Throwable t) {
-                consumer.accept(new ArrayList<>());
+                consumer.accept(null);
             }
         });
     }

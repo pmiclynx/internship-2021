@@ -14,10 +14,10 @@ import com.internship.tvseries.data.repository.details.TvDetailsRepository;
 import com.internship.tvseries.data.repository.details.TvDetailsRetrofitRepository;
 import com.internship.tvseries.data.repository.favorites.FavoritesRepository;
 import com.internship.tvseries.data.repository.favorites.FavoritesRoomRepository;
-import com.internship.tvseries.data.repository.popularRepository.PopularRepositoryLynxTv;
-import com.internship.tvseries.data.repository.popularRepository.PopularRepositoryMovieDB;
-import com.internship.tvseries.data.repository.topRatedRepository.TopRatedRepositoryLynxTv;
-import com.internship.tvseries.data.repository.topRatedRepository.TopRatedRepositoryMovieDB;
+import com.internship.tvseries.data.repository.base.popularRepository.PopularRepositoryLynxTv;
+import com.internship.tvseries.data.repository.base.popularRepository.PopularRepositoryMovieDB;
+import com.internship.tvseries.data.repository.base.topRatedRepository.TopRatedRepositoryLynxTv;
+import com.internship.tvseries.data.repository.base.topRatedRepository.TopRatedRepositoryMovieDB;
 import com.internship.tvseries.login_screen.login.LoginViewModelFactory;
 import com.internship.tvseries.login_screen.register.RegisterViewModelFactory;
 import com.internship.tvseries.ui.Popular.PopularViewModelFactory;
@@ -49,11 +49,11 @@ public class InjectorUtils {
     }
 
     public TopRatedViewModelFactory provideTopRatedViewModelFactory() {
-        return new TopRatedViewModelFactory(TopRatedRepositoryLynxTv.getInstance(LynxApiClient.getMovieApi()), TopRatedRepositoryMovieDB.getInstance(TheMovieDBApiClient.getMovieApi()));
+        return new TopRatedViewModelFactory(TopRatedRepositoryMovieDB.getInstance(TheMovieDBApiClient.getMovieApi()), TopRatedRepositoryLynxTv.getInstance(LynxApiClient.getMovieApi()));
     }
 
     public PopularViewModelFactory providePopularViewModelFactory() {
-        return new PopularViewModelFactory(PopularRepositoryLynxTv.getInstance(LynxApiClient.getMovieApi()), PopularRepositoryMovieDB.getInstance(TheMovieDBApiClient.getMovieApi()));
+        return new PopularViewModelFactory(PopularRepositoryMovieDB.getInstance(TheMovieDBApiClient.getMovieApi()), PopularRepositoryLynxTv.getInstance(LynxApiClient.getMovieApi()));
     }
 
     public FavoritesViewModelFactory provideFavoritesViewModelFactory(Context context) {

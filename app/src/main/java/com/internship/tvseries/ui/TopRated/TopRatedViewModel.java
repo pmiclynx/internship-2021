@@ -14,23 +14,26 @@ import java.util.function.Consumer;
 public class TopRatedViewModel extends BaseViewModel {
 
     private final TvRepository tvRepository;
-    private final TvRepository backendTopRatedRepository;
+    private final TvRepository lynxTopRatedRepository;
 
     private final MutableLiveData<List<Result>> _topRatedTvs = new MutableLiveData<>();
     public LiveData<List<Result>> topRatedTvs = _topRatedTvs;
 
-    public TopRatedViewModel(TvRepository tvRepository, TvRepository backendTopRatedRepository) {
+    private final MutableLiveData<List<Result>> _newTopRatedTvs = new MutableLiveData<>();
+    public LiveData<List<Result>> newTopRatedTvs = _newTopRatedTvs;
+
+    public TopRatedViewModel(TvRepository tvRepository, TvRepository lynxTopRatedRepository) {
         this.tvRepository = tvRepository;
-        this.backendTopRatedRepository=backendTopRatedRepository;
+        this.lynxTopRatedRepository = lynxTopRatedRepository;
         getTopRated();
     }
 
     private void getTopRated() {
-        backendTopRatedRepository.getByCategory(Constants.CATEGORY_TOP_RATED, new Consumer<List<Result>>() {
+        lynxTopRatedRepository.getByCategory(Constants.CATEGORY_TOP_RATED, 1, new Consumer<List<Result>>() {
             @Override
             public void accept(List<Result> results) {
                 if(results.isEmpty()){
-                    tvRepository.getByCategory(Constants.CATEGORY_TOP_RATED, new Consumer<List<Result>>() {
+                    tvRepository.getByCategory(Constants.CATEGORY_TOP_RATED, 1, new Consumer<List<Result>>() {
                         @Override
                         public void accept(List<Result> results) {
                             _topRatedTvs.postValue(results);
@@ -38,6 +41,25 @@ public class TopRatedViewModel extends BaseViewModel {
                     });
                 }else{
                     _topRatedTvs.postValue(results);
+                }
+            }
+        });
+    }
+
+    public void nextPage(int page) {
+        lynxTopRatedRepository.getByCategory(Constants.CATEGORY_POPULAR, page, new Consumer<List<Result>>() {
+            @Override
+            public void accept(List<Result> results) {
+                if (results == null) {
+                    tvRepository.getByCategory(Constants.CATEGORY_POPULAR, page, new Consumer<List<Result>>() {
+                        @Override
+                        public void accept(List<Result> results) {
+                            _newTopRatedTvs.postValue(results);
+                        }
+                    });
+                } else {
+//                    if (!results.isEmpty())
+                    _newTopRatedTvs.postValue(results);
                 }
             }
         });

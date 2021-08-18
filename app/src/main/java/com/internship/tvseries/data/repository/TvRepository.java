@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public interface TvRepository {
-    void getByCategory(String category, Consumer<List<Result>> consumer);
+    void getByCategory(String category, int page, Consumer<List<Result>> consumer);
 }

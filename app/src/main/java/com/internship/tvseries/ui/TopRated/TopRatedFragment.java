@@ -26,6 +26,7 @@ import java.util.List;
 public class TopRatedFragment extends BaseFragment<TopRatedViewModel> {
 
     private FragmentTopRatedBinding binding;
+    private GenAdapter adapter;
 
     @NonNull
     @NotNull
@@ -45,16 +46,20 @@ public class TopRatedFragment extends BaseFragment<TopRatedViewModel> {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstance) {
         super.onViewCreated(view, savedInstance);
         viewModel.topRatedTvs.observe(getViewLifecycleOwner(), this::bindUI);
+        viewModel.newTopRatedTvs.observe(getViewLifecycleOwner(), this::nextPage);
     }
 
     private void bindUI(List<Result> tvList) {
         binding.recyclerVtoprated.setLayoutManager(new LinearLayoutManager(getContext()));
-        GenAdapter adapter = new GenAdapter(getContext(), tvList, id -> {
+        adapter = new GenAdapter(getContext(), tvList, id -> {
             Intent intent = new Intent(getContext(), DetailsActivity.class);
             intent.putExtra("id", id);
             startActivity(intent);
-        });
+        }, page -> viewModel.nextPage(page));
         binding.recyclerVtoprated.setAdapter(adapter);
-        binding.recyclerVtoprated.setHasFixedSize(true);
+    }
+
+    private void nextPage(List<Result> newResults) {
+        adapter.appendList(newResults);
     }
 }

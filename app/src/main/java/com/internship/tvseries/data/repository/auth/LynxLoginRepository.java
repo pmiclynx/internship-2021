@@ -40,10 +40,10 @@ public class LynxLoginRepository implements RemoteLoginRepository {
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(@NotNull Call<LoginResponse> call, @NotNull Response<LoginResponse> response) {
-                if (response.body() != null) {
+                if (response.code() == 200 && response.body() != null) {
                     consumer.accept(new AuthState(true));
-
-                }
+                } else
+                    consumer.accept(new AuthState("Login error"));
             }
 
             @Override

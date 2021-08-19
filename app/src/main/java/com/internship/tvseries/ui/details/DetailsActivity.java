@@ -47,7 +47,6 @@ public class DetailsActivity extends BaseActivity<DetailsViewModel> {
     }
 
     private void bindUI(TvDetailsResponse tv) {
-        FavoritesRoomRepository repo = FavoritesRoomRepository.getInstance(FavoritesDatabase.getInstance(getApplicationContext()).favoritesDao());
         Glide.with(getApplicationContext())
                 .load(Constants.IMAGE_BASE_URL + tv.getBackdropPath())
                 .into(binding.ivBackdrop);

@@ -29,38 +29,19 @@ public class TopRatedViewModel extends BaseViewModel {
     }
 
     private void getTopRated() {
-        lynxTopRatedRepository.getByCategory(Constants.CATEGORY_TOP_RATED, 1, new Consumer<List<Result>>() {
+        tvRepository.getByCategory(Constants.CATEGORY_TOP_RATED, 1, new Consumer<List<Result>>() {
             @Override
             public void accept(List<Result> results) {
-                if(results.isEmpty()){
-                    tvRepository.getByCategory(Constants.CATEGORY_TOP_RATED, 1, new Consumer<List<Result>>() {
-                        @Override
-                        public void accept(List<Result> results) {
-                            _topRatedTvs.postValue(results);
-                        }
-                    });
-                }else{
-                    _topRatedTvs.postValue(results);
-                }
+                _topRatedTvs.postValue(results);
             }
         });
     }
 
     public void nextPage(int page) {
-        lynxTopRatedRepository.getByCategory(Constants.CATEGORY_POPULAR, page, new Consumer<List<Result>>() {
+        tvRepository.getByCategory(Constants.CATEGORY_POPULAR, page, new Consumer<List<Result>>() {
             @Override
             public void accept(List<Result> results) {
-                if (results == null) {
-                    tvRepository.getByCategory(Constants.CATEGORY_POPULAR, page, new Consumer<List<Result>>() {
-                        @Override
-                        public void accept(List<Result> results) {
-                            _newTopRatedTvs.postValue(results);
-                        }
-                    });
-                } else {
-//                    if (!results.isEmpty())
-                    _newTopRatedTvs.postValue(results);
-                }
+                _newTopRatedTvs.postValue(results);
             }
         });
     }

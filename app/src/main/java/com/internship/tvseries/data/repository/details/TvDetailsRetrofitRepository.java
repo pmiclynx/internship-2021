@@ -22,11 +22,6 @@ public class TvDetailsRetrofitRepository extends BaseDetailsRepository {
         super(tvDetailsApi);
     }
 
-    @Override
-    public void getTvDetails(int id, Consumer<TvDetailsResponse> consumer) {
-
-    }
-
     public static TvDetailsRetrofitRepository getInstance(TvDetailsApi tvDetailsApi){
         if (instance == null)
             instance = new TvDetailsRetrofitRepository(tvDetailsApi);

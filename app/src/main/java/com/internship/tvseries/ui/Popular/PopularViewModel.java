@@ -28,38 +28,19 @@ public class PopularViewModel extends BaseViewModel {
     }
 
     private void getPopular() {
-        lynxPopularRepository.getByCategory(Constants.CATEGORY_POPULAR,1, new Consumer<List<Result>>() {
+        tvRepository.getByCategory(Constants.CATEGORY_POPULAR, 1, new Consumer<List<Result>>() {
             @Override
             public void accept(List<Result> results) {
-                if (results.isEmpty()) {
-                    tvRepository.getByCategory(Constants.CATEGORY_POPULAR, 1, new Consumer<List<Result>>() {
-                        @Override
-                        public void accept(List<Result> results) {
-                            _popularTvs.postValue(results);
-                        }
-                    });
-                } else {
-                    _popularTvs.postValue(results);
-                }
+                _popularTvs.postValue(results);
             }
         });
     }
 
     public void nextPage(int page) {
-        lynxPopularRepository.getByCategory(Constants.CATEGORY_POPULAR, page, new Consumer<List<Result>>() {
+        tvRepository.getByCategory(Constants.CATEGORY_POPULAR, page, new Consumer<List<Result>>() {
             @Override
             public void accept(List<Result> results) {
-                if (results == null) {
-                    tvRepository.getByCategory(Constants.CATEGORY_POPULAR, page, new Consumer<List<Result>>() {
-                        @Override
-                        public void accept(List<Result> results) {
-                            _newPopularTvs.postValue(results);
-                        }
-                    });
-                } else {
-//                    if (!results.isEmpty())
-                        _newPopularTvs.postValue(results);
-                }
+                _newPopularTvs.postValue(results);
             }
         });
     }

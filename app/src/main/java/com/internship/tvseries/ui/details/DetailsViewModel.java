@@ -30,23 +30,13 @@ public class DetailsViewModel extends BaseViewModel {
     }
 
     private void setTv(int id) {
-        backendDetailsRepository.getTvDetails(id, new Consumer<TvDetailsResponse>() {
+        detailsRepository.getTvDetails(id, new Consumer<TvDetailsResponse>() {
             @Override
             public void accept(TvDetailsResponse tvDetailsResponse) {
-                if (tvDetailsResponse == null) {
-                    detailsRepository.getTvDetails(id, new Consumer<TvDetailsResponse>() {
-                        @Override
-                        public void accept(TvDetailsResponse tvDetailsResponse) {
-                            _tvDetails.postValue(tvDetailsResponse);
-                        }
-                    });
-
-                }
-
-                else _tvDetails.postValue(tvDetailsResponse);
-
+                _tvDetails.postValue(tvDetailsResponse);
             }
         });
+
     }
 
     public void checkIfAlreadyAdded(int id) {

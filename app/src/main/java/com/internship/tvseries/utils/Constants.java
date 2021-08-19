@@ -13,12 +13,7 @@ public final class Constants {
     public final static String CATEGORY_TOP_RATED = "top_rated";
 
     public static void setImageBaseUrl() {
-        LynxConfigRepository.getInstance().getConfig(configuration -> {
-            if (configuration == null) {
-                TheMovieDbConfigRepository.getInstance(TheMovieDBApiClient.getConfigApi()).getConfig(configuration1 ->
-                        IMAGE_BASE_URL = configuration1.getImages().getSecureBaseUrl() + configuration1.getImages().getPosterSizes().get(5));
-            } else
-                IMAGE_BASE_URL = configuration.getImages().getBaseUrl();
-        });
+        TheMovieDbConfigRepository.getInstance(TheMovieDBApiClient.getConfigApi()).getConfig(configuration1 ->
+                IMAGE_BASE_URL = configuration1.getImages().getSecureBaseUrl() + configuration1.getImages().getPosterSizes().get(5));
     }
 }
